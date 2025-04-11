@@ -33,26 +33,97 @@
     </div>
 
     <div class="form-group">
-      <label for="phoneNumber">Phone Number:</label>
-      <input 
-        type="tel" 
-        id="phoneNumber"
-        name="phoneNumber"
-        [(ngModel)]="player.phoneNumber">
+      <label for="password">Password:</label>
+      <div class="input-container">
+        <input 
+          type="password" 
+          id="password"
+          name="password"
+          [(ngModel)]="player.password"
+          required
+          minlength="8"
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{8,}$"
+          #password="ngModel">
+        <div class="validation-messages" *ngIf="password.touched">
+          <div *ngIf="password.errors?.['required']" class="validation-error">Password is required</div>
+          <div *ngIf="password.errors?.['minlength']" class="validation-error">Password must be at least 8 characters long</div>
+          <div *ngIf="password.errors?.['pattern']" class="validation-error">
+            Password must contain:
+            <ul>
+              <li>At least one uppercase letter</li>
+              <li>At least one lowercase letter</li>
+              <li>At least one number</li>
+              <li>At least one special character (&#64;$!%*?&_)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="form-group">
-      <label for="skillLevel">Skill Level:</label>
+      <label for="cell">cell:</label>
       <input 
-        type="number" 
-        id="skillLevel"
-        name="skillLevel"
-        [(ngModel)]="player.skillLevel"
-        min="1"
-        max="10"
-        required>
+        type="tel" 
+        id="cell"
+        name="cell"
+        [(ngModel)]="player.cell">
     </div>
 
-    <button type="submit" [disabled]="!registerForm.form.valid">Register</button>
+    <div class="form-group">
+      <label for="level">Skill Level:</label>
+      <input 
+        type="number" 
+        id="level"
+        name="level"
+        [(ngModel)]="player.level"
+        min="3.5"
+        max="4.5"
+        step="0.1"
+        #level="ngModel">
+      <div *ngIf="level.invalid && (level.dirty || level.touched)" class="validation-error">
+        <div *ngIf="level.errors?.['min'] || level.errors?.['max']">Skill level must be between 3.5 and 4.5</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="court">Preferred Court:</label>
+      <select 
+        id="court"
+        name="court"
+        [(ngModel)]="player.courtId"
+        required
+        #court="ngModel">
+        <option value="">Select a court</option>
+        <option *ngFor="let court of courts" [value]="court.courtId">
+          {{ court.name }}
+        </option>
+      </select>
+      <div *ngIf="court.invalid && (court.dirty || court.touched)" class="validation-error">
+        <div *ngIf="court.errors?.['required']">Preferred court is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="availability">Availability:</label>
+      <textarea 
+        id="availability"
+        name="availability"
+        [(ngModel)]="player.availability"
+        maxlength="255"
+        placeholder="Available most days starting 8AM. Not available most Tuesdays and Sundays."
+        rows="4"
+        class="availability-textarea">
+      </textarea>
+    </div>
+
+    <div *ngIf="isLoading" class="loading">
+      Loading courts...
+    </div>
+
+    <div *ngIf="error" class="error">
+      {{ error }}
+    </div>
+
+    <button type="submit" [disabled]="!registerForm.form.valid || !player.courtId">Register</button>
   </form>
 </div>

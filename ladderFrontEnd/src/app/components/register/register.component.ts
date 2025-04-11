@@ -1,37 +1,74 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { Player } from '../../ladderObjects';
+import { Router } from '@angular/router';
+import { Player, Court } from '../../ladderObjects';
 import { HttpService } from '../../app.http.service';
-
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   providers: [HttpService]
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   player: Player = {
     firstName: '',
     lastName: '',
     email: '',
-    phoneNumber: '',
-    skillLevel: 1
+    cell: '',
+    level: 1,
+    ladderId: 1,
+    courtId: 0,
+    availability: '',
+    password: '',
+    playerId: 0
   };
 
-  constructor (public httpService: HttpService){
+  courts: Court[] = [];
+  isLoading = true;
+  error: string | null = null;
 
+  constructor (
+    public httpService: HttpService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.loadCourts();
+  }
+
+  loadCourts(): void {
+    this.httpService.getCourts().subscribe({
+      next: (data) => {
+        this.courts = data;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load courts. Please try again later.';
+        this.isLoading = false;
+        console.error('Error loading courts:', err);
+      }
+    });
   }
 
   onSubmit() {
-    // TODO: Implement the registration logic here
     console.log('Form submitted:', this.player);
-  this.httpService.register(this.player);
+    this.httpService.register(this.player).subscribe({
+      next: (response) => {
+        console.log('Registration successful:', response);
+        this.router.navigate(['/standing']);
+      },
+      error: (error) => {
+        console.error('Registration failed:', error);
+      }
+    });
   }
 } 

@@ -1,0 +1,51 @@
+.standings-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.standings-table th,
+.standings-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.standings-table th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
+
+.standings-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.loading,
+.error,
+.no-data {
+  text-align: center;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.loading {
+  background-color: #f0f0f0;
+}
+
+.error {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.no-data {
+  background-color: #f5f5f5;
+  color: #666;
+}

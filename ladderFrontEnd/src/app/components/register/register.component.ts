@@ -29,7 +29,15 @@ export class RegisterComponent implements OnInit {
     courtId: 0,
     availability: '',
     password: '',
-    playerId: 0
+    playerId: 0,
+    matchesWon: 0,
+    matchesLost: 0,
+    gamesWon: 0,
+    gamesLost: 0,
+    id: 0,
+    goesBy: '',
+    phone: '',
+    courtName: ''
   };
 
   courts: Court[] = [];

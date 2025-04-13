@@ -6,5 +6,6 @@ import java.util.List;
 public interface PlayerDao {
     Integer save(Player player);
     void addPlayerToLadder(Integer playerId, Integer ladderId);
-    List<Standing> getStandingsByLadderId(Integer ladderId);
+    
+    List<Player> getPlayersByLadderId(Integer ladderId);
 }

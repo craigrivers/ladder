@@ -1,0 +1,49 @@
+<div class="players-container">
+  <h2>Players</h2>
+
+  <div *ngIf="isLoading" class="loading">
+    Loading players...
+  </div>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+  <table *ngIf="!isLoading && !error && players.length > 0" class="players-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th *ngIf="page === 'players'">Contact</th>
+        <th *ngIf="page === 'players'">Availability</th>
+        <th *ngIf="page === 'players'">Preferred Court</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let player of players">
+        <td>{{  player.firstName + ' ' + player.lastName }}</td>
+        <td *ngIf="page === 'players'">
+          <div>{{ player.email }}</div>
+          <div>{{ player.cell }}</div>
+        </td>
+        <td *ngIf="page === 'players'">{{ player.availability }}</td>
+        <td *ngIf="page === 'players'">{{ player.courtName }}</td>
+        <td *ngIf="page === 'standing'">
+          <div class="stats-container">
+            <span class="stat-label">Won:</span> {{ player.matchesWon }}
+            <span class="stat-label">Lost:</span> {{ player.matchesLost }}
+          </div>
+        </td>
+        
+        <td *ngIf="page === 'standing'">
+          <div class="stats-container">
+            <span class="stat-label">Won:</span> {{ player.gamesWon }}
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!isLoading && !error && players.length === 0" class="no-data">
+    No players available.
+  </div>
+</div>

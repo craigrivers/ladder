@@ -23,7 +23,7 @@
     <tbody>
       <tr *ngFor="let standing of standings; let i = index">
         <td>{{ i + 1 }}</td>
-        <td>{{ standing.goesBy ? standing.goesBy : standing.firstName + ' ' + standing.lastName }}</td>
+        <td>{{ standing.firstName + ' ' + standing.lastName }}</td>
         <td>{{ standing.matchesWon }}</td>
         <td>{{ standing.matchesLost }}</td>
         <td>{{ standing.gamesWon }}</td>

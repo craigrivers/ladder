@@ -9,6 +9,14 @@ export interface Player {
     availability:string;
     password:string;    
     playerId:number;
+    matchesWon: number;
+    matchesLost: number;
+    gamesWon: number;
+    gamesLost: number;
+    id: number;
+    goesBy: string;
+    phone: string;
+    courtName: string;
 }
 
 export interface Standing {

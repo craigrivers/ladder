@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../app.http.service';
-import { Standing } from '../../ladderObjects';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { Player } from '../../ladderObjects';
+import { HttpService } from '../../app.http.service';
 
 @Component({
-  selector: 'app-standing',
+  selector: 'app-players',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './standing.component.html',
-  styleUrls: ['./standing.component.css'],
+  templateUrl: './players.component.html',
+  styleUrls: ['./players.component.css' ],
   providers: [HttpService]
 })
-export class StandingComponent implements OnInit {
-  standings: Standing[] = [];
-
+export class PlayersComponent implements OnInit {
+  players: Player[] = [];
   isLoading = true;
   error: string | null = null;
   http: HttpService;
@@ -26,20 +26,19 @@ export class StandingComponent implements OnInit {
 
   ngOnInit(): void {
     this.page = this.route.snapshot.data['page'];
-    this.loadStandings();
+    this.loadPlayers();
   }
 
-  loadStandings(): void {
-    // Using ladderId 1 as an example - you might want to make this dynamic
-    this.http.getStandings(1).subscribe({
+  loadPlayers(): void {
+    this.http.getPlayers(1).subscribe({
       next: (data) => {
-        this.standings = data;
+        this.players = data;
         this.isLoading = false;
       },
       error: (err) => {
-        this.error = 'Failed to load standings. Please try again later.';
+        this.error = 'Failed to load players. Please try again later.';
         this.isLoading = false;
-        console.error('Error loading standings:', err);
+        console.error('Error loading players:', err);
       }
     });
   }

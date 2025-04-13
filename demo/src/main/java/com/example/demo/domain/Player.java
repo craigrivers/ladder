@@ -12,7 +12,12 @@ public class Player {
     Integer courtId;
     String availability;
     String password;
-    
+    Integer matchesWon;
+    Integer matchesLost;  
+    Integer gamesWon;
+    Integer gamesLost;
+    String courtName;
+
     public String getFirstName() {
         return firstName;
     }
@@ -99,5 +104,45 @@ public class Player {
 
     public void setPassword(String password){
         this.password = password;
-    }   
+    }
+
+    public Integer getMatchesWon() {
+        return matchesWon;
+    }
+
+    public void setMatchesWon(Integer matchesWon) {
+        this.matchesWon = matchesWon;
+    }
+
+    public Integer getMatchesLost() {
+        return matchesLost;
+    }
+
+    public void setMatchesLost(Integer matchesLost) {
+        this.matchesLost = matchesLost;
+    }
+
+    public Integer getGamesWon() {
+        return gamesWon;
+    }
+
+    public void setGamesWon(Integer gamesWon) {
+        this.gamesWon = gamesWon;
+    }
+
+    public Integer getGamesLost() {
+        return gamesLost;
+    }
+
+    public void setGamesLost(Integer gamesLost) {
+        this.gamesLost = gamesLost;
+    }
+
+    public String getCourtName() {
+        return courtName;
+    }
+    
+    public void setCourtName(String courtName) {
+        this.courtName = courtName;
+    }
 }

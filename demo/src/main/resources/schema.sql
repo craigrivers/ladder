@@ -1,4 +1,4 @@
-
+/*
 
 DROP TABLE PLAYERS if exists;
 DROP TABLE PLAYER if exists;
@@ -25,3 +25,4 @@ INSERT INTO COURT (NAME, ADDRESS, PHONE, LINK) VALUES ('Lake Arbor Park', '1100 
 INSERT INTO COURT (NAME, ADDRESS, PHONE, LINK) VALUES ('Lake Arbor Golf Course', '1401 Golf Course Dr Mitchellville, MD 20721', '', '');
 INSERT INTO COURT (NAME, ADDRESS, PHONE, LINK) VALUES ('Tucker Rd', '1771 Tucker Road, Fort Washington, MD 20744', ' (301) 248-4404','https://www.pgparks.com/facilities/tucker-road-community-center');
 
+*/

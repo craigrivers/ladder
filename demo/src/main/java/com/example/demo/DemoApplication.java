@@ -71,8 +71,14 @@ public class DemoApplication {
 
   @GetMapping("/ladder/standings")
   public List<Standing> getStandingsByLadderId(@RequestParam Integer ladderId) {
-    List <Standing> standings = playerService.getStandingsByLadderId(ladderId);
-    return standings;
+    List <Standing> players = playerService.getStandingsByLadderId(ladderId);
+    return players;
+  }
+
+  @GetMapping("/ladder/players")
+  public List<Player> getPlayersByLadderId(@RequestParam Integer ladderId) {
+    List <Player> players = playerService.getPlayersByLadderId(ladderId);
+    return players;
   }
 
   @GetMapping("/ladder/courts")
@@ -80,6 +86,8 @@ public class DemoApplication {
     List <Court> courts = playerService.getCourts();
     return courts;
   }
+
+}
 /* 
 	@GetMapping("/ladder/hello")
     public String helloTest(@RequestParam(value = "name", defaultValue = "World") String name) {
@@ -96,5 +104,4 @@ public String  helloTest(@RequestParam(value = "name", defaultValue = "World") S
 }
 	 */
 
-}
 

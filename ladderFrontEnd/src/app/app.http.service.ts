@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpUrlEncodingCodec } from '@angu
 import { environment } from '../environments/environment';
 import { Observable } from 'rxjs';
 import { catchError, throwError } from 'rxjs';
-import { Player, Standing, Court } from './ladderObjects';
+import { Player, Court } from './ladderObjects';
 
 @Injectable()
 export class HttpService {
@@ -31,10 +31,10 @@ export class HttpService {
     );
   }
 
-  getStandings(ladderId: number): Observable<Standing[]> {
+  getStandings(ladderId: number): Observable<Player[]> {
     const params = new HttpParams().set('ladderId', ladderId.toString());
     
-    return this.http.get<Standing[]>(
+    return this.http.get<Player[]>(
       'http://localhost:8080/ladder/standings',
       { params }
     ).pipe(
@@ -55,6 +55,26 @@ export class HttpService {
       })
     );
   }
+/*
+  getPlayers(): Observable<Player[]> {
+    return this.http.get<Player[]>(`${this.apiUrl}/players`);
+  }
+*/
+
+  getPlayers(ladderId: number): Observable<Player[]> {
+    const params = new HttpParams().set('ladderId', ladderId.toString());
+    
+    return this.http.get<Player[]>(
+      'http://localhost:8080/ladder/players',
+      { params }
+    ).pipe(
+      catchError((error: any) => {
+        console.error('Error fetching standings:', error);
+        return throwError(() => new Error(error.message || 'Failed to fetch standings'));
+      })
+    );
+  }
+
 
   private handleError(error: any) {
     if (error.status === 500) {

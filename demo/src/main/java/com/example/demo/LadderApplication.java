@@ -21,16 +21,16 @@ import com.example.demo.service.PlayerService;
 
 @SpringBootApplication
 @RestController
-public class DemoApplication {
+public class LadderApplication {
 
   @Autowired
     private PlayerService playerService;
 
-    DemoApplication (PlayerService playerService){
+    LadderApplication (PlayerService playerService){
         this.playerService = playerService;
     }
     public static void main(String[] args) {
-      SpringApplication.run(DemoApplication.class, args);
+      SpringApplication.run(LadderApplication.class, args);
     }
 
     @Bean

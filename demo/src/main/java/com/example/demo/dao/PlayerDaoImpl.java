@@ -12,8 +12,8 @@
 	public class PlayerDaoImpl implements PlayerDao {
 		private final JdbcTemplate jdbcTemplate;
 
-		private static final String INSERT_INTO_PLAYER = "INSERT INTO PLAYER (first_name, last_name,  password,cell, email, level, court_id, availability) " +
-				"VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		private static final String INSERT_INTO_PLAYER = "INSERT INTO PLAYER (first_name, last_name, password, cell, email, level, court_id, availability) " +
+				"VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING player_id";
 
 		private static final String INSERT_INTO_PLAYER_LADDER = "INSERT INTO PLAYER_LADDER (LADDER_ID, PLAYER_ID) VALUES (?, ?)";
 

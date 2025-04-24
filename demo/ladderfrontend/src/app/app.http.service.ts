@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpUrlEncodingCodec } from '@angu
 import { environment } from '../environments/environment';
 import { Observable } from 'rxjs';
 import { catchError, throwError } from 'rxjs';
-import { Player, Court } from './ladderObjects';
+import { Player, Court, Match } from './ladderObjects';
 
 @Injectable()
 export class HttpService {
@@ -45,6 +45,19 @@ export class HttpService {
     );
   }
 
+  login(email: string, password: string): Observable<Player> {
+    const params = new HttpParams().set('email', email).set('password', password);
+    return this.http.get<Player>(
+      'http://localhost:8080/ladder/login',
+      { params }
+    ).pipe(
+      catchError((error: any) => {
+        console.error('Error during login:', error);
+        return throwError(() => new Error(error.message || 'Login failed'));
+      })
+    );
+  } 
+
   getCourts(): Observable<Court[]> {
     return this.http.get<Court[]>(
       'http://localhost:8080/ladder/courts'
@@ -55,11 +68,18 @@ export class HttpService {
       })
     );
   }
-/*
-  getPlayers(): Observable<Player[]> {
-    return this.http.get<Player[]>(`${this.apiUrl}/players`);
+
+  scheduleMatch(match: Match): Observable<Match> {
+    return this.http.post<Match>(
+      'http://localhost:8080/ladder/addMatch',
+      match
+    ).pipe(
+      catchError((error: any) => {
+        console.error('Error scheduling match:', error);
+        return throwError(() => new Error(error.message || 'Failed to schedule match'));
+      })
+    );
   }
-*/
 
   getPlayers(ladderId: number): Observable<Player[]> {
     const params = new HttpParams().set('ladderId', ladderId.toString());
@@ -75,6 +95,30 @@ export class HttpService {
     );
   }
 
+  updatePlayer(player: Player): Observable<Player> {
+    return this.http.put<Player>(
+      'http://localhost:8080/ladder/players',
+      player
+    ).pipe(
+      catchError((error: any) => {
+        console.error('Error updating player:', error);
+        return throwError(() => new Error(error.message || 'Failed to update player'));
+      })
+    );
+  }
+
+  getScheduledMatches(ladderId: number): Observable<Match[]> {
+    const params = new HttpParams().set('ladderId', ladderId.toString());
+    return this.http.get<Match[]>(
+      'http://localhost:8080/ladder/scheduledMatches',
+      { params }
+    ).pipe(
+      catchError((error: any) => {
+        console.error('Error fetching scheduled matches:', error);
+        return throwError(() => new Error(error.message || 'Failed to fetch scheduled matches'));
+      })
+    );
+  }
 
   private handleError(error: any) {
     if (error.status === 500) {

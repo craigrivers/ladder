@@ -41,4 +41,11 @@ public class PlayerService {
     public List<Court> getCourts(){
         return this.courtDao.getCourts();
     }   
+    public void update(Player player){
+        this.playerDao.updatePlayer(player.getPlayerId(), player.getAvailability());
+    }   
+
+    public Player login(String email, String password){
+        return this.playerDao.login(email, password);
+    }
 }

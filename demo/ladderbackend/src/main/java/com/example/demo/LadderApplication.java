@@ -18,6 +18,8 @@ import com.example.demo.domain.Player;
 import com.example.demo.domain.Standing;
 import com.example.demo.domain.Court;
 import com.example.demo.service.PlayerService;
+import com.example.demo.service.MatchService;
+import com.example.demo.domain.Match;
 
 @SpringBootApplication
 @RestController
@@ -25,9 +27,11 @@ public class LadderApplication {
 
   @Autowired
     private PlayerService playerService;
+    private MatchService matchService;
 
-    LadderApplication (PlayerService playerService){
+    LadderApplication (PlayerService playerService, MatchService matchService){
         this.playerService = playerService;
+        this.matchService = matchService;
     }
     public static void main(String[] args) {
       SpringApplication.run(LadderApplication.class, args);
@@ -81,10 +85,45 @@ public class LadderApplication {
     return players;
   }
 
+  @RequestMapping(value = { "/ladder/players" }, method = { RequestMethod.PUT }, produces = { "application/json" })
+	public ResponseEntity<Map<String, String>> updatePlayer(@RequestBody Player player) throws IOException {
+		System.out.println("IN the backend code" + player);
+        playerService.update(player);
+		Map<String, String> response = new HashMap<>();
+		response.put("message", "Player registered successfully");
+		return ResponseEntity.ok(response);
+	}
+
   @GetMapping("/ladder/courts")
   public List<Court> getCourts() {
     List <Court> courts = playerService.getCourts();
     return courts;
+  }
+
+  @GetMapping("/ladder/login")
+  public Player login(@RequestParam String email, @RequestParam String password) {
+    return playerService.login(email, password);
+  } 
+
+  @GetMapping("/ladder/scheduledMatches")
+  public List<Match> getScheduledMatches(@RequestParam Integer ladderId) {
+    System.out.println("in getScheduledMatches code" + ladderId);
+    List <Match> matches = matchService.getScheduledMatches(ladderId);
+    return matches;
+  }
+
+  @PostMapping("/ladder/addMatch")
+  public ResponseEntity<Map<String, String>> addMatch(@RequestBody Match match) throws IOException {
+      System.out.println("in addMatchcode" + match);
+      matchService.addMatch(match);
+      Map<String, String> response = new HashMap<>();
+      response.put("message", "Match added successfully");
+      return ResponseEntity.ok(response);
+  }     
+
+  @PostMapping("/ladder/updateMatch")
+  public void updateMatch(@RequestBody Match match) {
+    matchService.updateMatch(match);
   }
 
 }

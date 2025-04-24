@@ -1,5 +1,28 @@
 <div class="players-container">
-  <h2>Players</h2>
+  <div *ngIf="currentPlayer" class="current-player">
+    <h3>Update Availability, {{ currentPlayer.firstName }} {{ currentPlayer.lastName }}</h3>
+    <div class="player-info">
+      <div class="form-group">
+        <label for="availability">Availability</label>
+        <textarea 
+          id="availability" 
+          [(ngModel)]="updatedAvailability" 
+          name="availability" 
+          rows="4" 
+          class="availability-textarea"
+          placeholder="Enter your availability details...">
+        </textarea>
+      </div>
+      <button 
+        type="button" 
+        (click)="updateAvailability()" 
+        [disabled]="!updatedAvailability">
+        Update Availability
+      </button>
+    </div>
+  </div>
+
+  <h3>Players</h3>
 
   <div *ngIf="isLoading" class="loading">
     Loading players...
@@ -20,7 +43,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let player of players">
-        <td>{{  player.firstName + ' ' + player.lastName }}</td>
+        <td>{{ player.firstName + ' ' + player.lastName }}</td>
         <td *ngIf="page === 'players'">
           <div>{{ player.email }}</div>
           <div>{{ player.cell }}</div>
@@ -46,4 +69,93 @@
   <div *ngIf="!isLoading && !error && players.length === 0" class="no-data">
     No players available.
   </div>
+  <div *ngIf="page === 'players'">
+  <h3>My Scheduled Matches</h3>
+  <div *ngIf="scheduledMatches.length > 0">
+    <div *ngFor="let match of scheduledMatches">
+      <p>{{ match.matchDate }}</p>
+     
+      <p>{{ match.courtName }}</p>
+      <p>{{ match.player1Name }} vs {{ match.player2Name }}</p>
+    </div>
+  </div>
+
+  <h3>Scheduled Matches</h3>
+  <table *ngIf="scheduledMatches.length > 0" class="matches-table">
+    <thead>
+      <tr>
+        <th>Date & Time</th>
+        <th>Match</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let match of scheduledMatches">
+        <td>{{ match.matchDate | date:'medium' }}</td>
+        <td>{{ match.player1Name }} vs {{ match.player2Name }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="scheduledMatches.length === 0" class="no-data">
+    No scheduled matches available.
+  </div>
+
+  <h3>Schedule a Match</h3>
+  
+  <div class="container">
+    
+    <!-- Match Scheduling Form -->
+    <div class="match-scheduling-form">
+      <h3>Schedule a Match</h3>
+      <form (ngSubmit)="scheduleMatch()">
+        <div class="form-group">
+          <label for="player1">Player 1</label>
+          <select id="player1" [(ngModel)]="newMatch.player1Id" name="player1" disabled>
+            <option [value]="newMatch.player1Id">
+              {{ newMatch.player1Name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="player2">Player 2</label>
+          <select id="player2" [(ngModel)]="newMatch.player2Id" name="player2" required>
+            <option value="">Select a player</option>
+            <option *ngFor="let player of players" 
+                    [value]="player.playerId"
+                    [disabled]="player.playerId === currentPlayer?.playerId">
+              {{ player.firstName }} {{ player.lastName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="court">Court</label>
+          <select id="court" [(ngModel)]="newMatch.courtId" name="court" required>
+            <option value="">Select a court</option>
+            <option *ngFor="let court of courts" [value]="court.courtId">
+              {{ court.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="matchDate">Match Date and Time</label>
+          <input type="datetime-local" 
+                 id="matchDate" 
+                 name="matchDate" 
+                 [(ngModel)]="newMatch.matchDate" 
+                 required>
+        </div>
+
+        <div *ngIf="error" class="error-message">
+          {{ error }}
+        </div>
+
+        <button type="submit" [disabled]="!newMatch.player2Id || !newMatch.courtId || !newMatch.matchDate">
+          Schedule Match
+        </button>
+      </form>
+    </div>
+  </div>
+
 </div>

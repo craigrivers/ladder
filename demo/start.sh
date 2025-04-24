@@ -30,7 +30,7 @@ sleep 15
 echo -e "${GREEN}Starting frontend application...${NC}"
 cd ../ladderfrontend
 mvn clean install -DskipTests
-npm start --prefix ../ladderfrontend &
+npm start --prefix ../ladderfrontend -- --host 0.0.0.0 &
 FRONTEND_PID=$!
 echo -e "${GREEN}Frontend PID: ${FRONTEND_PID}${NC}"
 lsof -i :4200 >> start.log

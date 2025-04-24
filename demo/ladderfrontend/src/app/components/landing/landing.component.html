@@ -1,0 +1,63 @@
+<div class="landing-container">
+  <div class="hero-section">
+    <h1>Welcome to the Tennis Ladder</h1>
+    <p class="subtitle">Join our competitive tennis community and climb the ranks!</p>
+    <button class="register-button" (click)="navigateToRegister()">Register Now</button>
+  </div>
+
+  <div class="login-section">
+    <h2>Already a member? Sign in</h2>
+    <form (ngSubmit)="onLogin()" class="login-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          [ngModel]="email()"
+          (ngModelChange)="email.set($event)"
+          name="email"
+          required
+          placeholder="Enter your email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          [ngModel]="password()"
+          (ngModelChange)="password.set($event)"
+          name="password"
+          required
+          placeholder="Enter your password"
+        />
+      </div>
+      <div *ngIf="errorMessage()" class="error-message">
+        {{ errorMessage() }}
+      </div>
+      <div *ngIf="isLoading()" class="loading">
+        Logging in...
+      </div>
+      <button type="submit" [disabled]="isLoading()" class="login-button">Sign In</button>
+    </form>
+  </div>
+
+  <div class="info-section">
+    <h2>About the Tennis Ladder</h2>
+    <p>
+      Our tennis ladder is a dynamic ranking system that allows players to challenge each other and move up or down based on match results. 
+      Here's how it works:
+    </p>
+    <ul>
+      <li>Register to join the ladder and receive your initial ranking</li>
+      <li>Challenge players within your range to play matches</li>
+      <li>Report match scores to update your position</li>
+      <li>Climb the ladder by winning matches against higher-ranked players</li>
+      <li>View current standings and player profiles</li>
+    </ul>
+    <p>
+      The ladder is updated weekly, and players are encouraged to play at least one match per month to maintain their position.
+      Get started today and join our competitive tennis community!
+    </p>
+  </div>
+</div> 

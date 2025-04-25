@@ -97,7 +97,14 @@ export class PlayersComponent implements OnInit {
   loadScheduledMatches(): void {
     this.http.getScheduledMatches(1).subscribe({
       next: (data) => {
-        this.scheduledMatches = data;
+        // Ensure each match has the correct courtId
+        this.scheduledMatches = data.map(match => {
+          const court = this.courts.find(c => c.name === match.courtName);
+          if (court) {
+            match.courtId = court.courtId;
+          }
+          return match;
+        });
       },
       error: (err) => {
         this.error = 'Failed to load scheduled matches. Please try again later.';
@@ -191,13 +198,32 @@ export class PlayersComponent implements OnInit {
     this.http.updatePlayer(updatedPlayer).subscribe({
       next: (response) => {
         console.log('Availability updated successfully:', response);
-        this.currentPlayer = response;
-        this.playerService.setPlayer(response);
+        this.currentPlayer = updatedPlayer;
+        this.playerService.setPlayer(updatedPlayer);
         this.loadPlayers(); // Refresh the players list
       },
       error: (err) => {
         this.error = 'Failed to update availability. Please try again later.';
         console.error('Error updating availability:', err);
+      }
+    });
+  }
+
+  updateMatch(match: Match): void {
+    // Update courtName based on selected courtId
+    const selectedCourt = this.courts.find(court => court.courtId === match.courtId);
+    if (selectedCourt) {
+      match.courtName = selectedCourt.name;
+    }
+
+    this.http.updateMatch(match).subscribe({
+      next: (response) => {
+        console.log('Match updated successfully:', response);
+        this.loadScheduledMatches(); // Refresh the matches list
+      },
+      error: (err) => {
+        this.error = 'Failed to update match. Please try again later.';
+        console.error('Error updating match:', err);
       }
     });
   }

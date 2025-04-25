@@ -20,7 +20,7 @@ export class HttpService {
     console.log("JSON String = " + JSON.stringify(player));
     
     return this.http.post(
-      'http://localhost:8080/ladder/register',
+      `${this.apiUrl}register`,
       player,
       { headers }
     ).pipe(
@@ -60,7 +60,7 @@ export class HttpService {
 
   getCourts(): Observable<Court[]> {
     return this.http.get<Court[]>(
-      'http://localhost:8080/ladder/courts'
+      `${this.apiUrl}courts`
     ).pipe(
       catchError((error: any) => {
         console.error('Error fetching courts:', error);
@@ -71,7 +71,7 @@ export class HttpService {
 
   scheduleMatch(match: Match): Observable<Match> {
     return this.http.post<Match>(
-      'http://localhost:8080/ladder/addMatch',
+      `${this.apiUrl}addMatch`,
       match
     ).pipe(
       catchError((error: any) => {
@@ -81,11 +81,23 @@ export class HttpService {
     );
   }
 
+  updateMatch(match: Match): Observable<Match> {
+    return this.http.post<Match>(
+      `${this.apiUrl}updateMatch`,
+      match
+    ).pipe(
+      catchError((error: any) => {
+        console.error('Error updating match:', error);
+        return throwError(() => new Error(error.message || 'Failed to update match'));
+      })
+    );
+  }
+
   getPlayers(ladderId: number): Observable<Player[]> {
     const params = new HttpParams().set('ladderId', ladderId.toString());
     
     return this.http.get<Player[]>(
-      'http://localhost:8080/ladder/players',
+      `${this.apiUrl}players`,
       { params }
     ).pipe(
       catchError((error: any) => {
@@ -110,7 +122,7 @@ export class HttpService {
   getScheduledMatches(ladderId: number): Observable<Match[]> {
     const params = new HttpParams().set('ladderId', ladderId.toString());
     return this.http.get<Match[]>(
-      'http://localhost:8080/ladder/scheduledMatches',
+      `${this.apiUrl}scheduledMatches`,
       { params }
     ).pipe(
       catchError((error: any) => {

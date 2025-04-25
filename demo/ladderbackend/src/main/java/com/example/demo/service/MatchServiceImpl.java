@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
     @Override
     public List<Match> getScheduledMatches(Integer ladderId) {
-        System.out.println("in getScheduledMatches service code " + ladderId);
         return matchDao.getScheduledMatches(ladderId);
     }
 

@@ -43,7 +43,7 @@ public class LadderApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/ladder/**")
-                        .allowedOrigins("http://localhost:4200")
+                        .allowedOrigins("http://localhost:4200", "http://192.168.1.158:4200")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
@@ -66,7 +66,6 @@ public class LadderApplication {
 	 */
 	@RequestMapping(value = { "/ladder/register" }, method = { RequestMethod.POST }, produces = { "application/json" })
 	public ResponseEntity<Map<String, String>> update(@RequestBody Player player) throws IOException {
-		System.out.println("IN the backend code" + player);
         playerService.save(player);
 		Map<String, String> response = new HashMap<>();
 		response.put("message", "Player registered successfully");
@@ -87,10 +86,9 @@ public class LadderApplication {
 
   @RequestMapping(value = { "/ladder/players" }, method = { RequestMethod.PUT }, produces = { "application/json" })
 	public ResponseEntity<Map<String, String>> updatePlayer(@RequestBody Player player) throws IOException {
-		System.out.println("IN the backend code" + player);
-        playerService.update(player);
+    playerService.update(player);
 		Map<String, String> response = new HashMap<>();
-		response.put("message", "Player registered successfully");
+		response.put("message", "Player updated successfully");
 		return ResponseEntity.ok(response);
 	}
 
@@ -102,19 +100,18 @@ public class LadderApplication {
 
   @GetMapping("/ladder/login")
   public Player login(@RequestParam String email, @RequestParam String password) {
+    System.out.println("Login request received for email: " + email + " and password: " + password);
     return playerService.login(email, password);
   } 
 
   @GetMapping("/ladder/scheduledMatches")
   public List<Match> getScheduledMatches(@RequestParam Integer ladderId) {
-    System.out.println("in getScheduledMatches code" + ladderId);
     List <Match> matches = matchService.getScheduledMatches(ladderId);
     return matches;
   }
 
   @PostMapping("/ladder/addMatch")
   public ResponseEntity<Map<String, String>> addMatch(@RequestBody Match match) throws IOException {
-      System.out.println("in addMatchcode" + match);
       matchService.addMatch(match);
       Map<String, String> response = new HashMap<>();
       response.put("message", "Match added successfully");
@@ -125,22 +122,4 @@ public class LadderApplication {
   public void updateMatch(@RequestBody Match match) {
     matchService.updateMatch(match);
   }
-
 }
-/* 
-	@GetMapping("/ladder/hello")
-    public String helloTest(@RequestParam(value = "name", defaultValue = "World") String name) {
-      return String.format("Hello Test %s!", name);
-    }
-*/
-
-
-/* 
-@RequestMapping(value = "/ladder/hello", method = { RequestMethod.GET }, produces = {
-		"application/json" })
-public String  helloTest(@RequestParam(value = "name", defaultValue = "World") String name) {
-	 return String.format("Hello Test %s!", name);
-}
-	 */
-
-

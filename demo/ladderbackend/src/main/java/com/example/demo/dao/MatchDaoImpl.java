@@ -48,8 +48,7 @@ public class MatchDaoImpl implements MatchDao {
         """;
 
     @Override
-    public List<Match> getScheduledMatches(Integer ladderId) {
-        System.out.println("in getScheduledMatches dao code " + ladderId);  
+    public List<Match> getScheduledMatches(Integer ladderId) { 
         return jdbcTemplate.query(GET_SCHEDULED_MATCHES, new Object[]{ladderId}, (rs, rowNum) -> {
             return new Match(
                 rs.getInt("MATCH_ID"),
@@ -96,7 +95,14 @@ public class MatchDaoImpl implements MatchDao {
 
     @Override
     public void updateMatch(Match match) {
-        jdbcTemplate.update(UPDATE_MATCH, match.getMatchId(), match.getMatchScheduledStatus(), match.getMatchDate(), match.getCourtId() );
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(UPDATE_MATCH);
+            ps.setString(1, match.getMatchScheduledStatus());
+            ps.setTimestamp(2, match.getMatchDate());
+            ps.setInt(3, match.getCourtId());
+            ps.setInt(4, match.getMatchId());
+            return ps;
+        });
     }
 
 }

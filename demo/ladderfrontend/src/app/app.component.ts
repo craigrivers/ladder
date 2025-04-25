@@ -6,7 +6,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule, NavigationComponent],
+  imports: [RouterOutlet, CommonModule, NavigationComponent],
   template: `
     <app-navigation *ngIf="!isLandingPage()"></app-navigation>
     <router-outlet></router-outlet>

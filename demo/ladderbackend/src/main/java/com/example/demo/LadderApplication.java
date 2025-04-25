@@ -100,7 +100,7 @@ public class LadderApplication {
 
   @GetMapping("/ladder/login")
   public Player login(@RequestParam String email, @RequestParam String password) {
-    System.out.println("Login request received for email: " + email + " and password: " + password);
+    System.out.println("Login request received for email: " + email );
     return playerService.login(email, password);
   } 
 

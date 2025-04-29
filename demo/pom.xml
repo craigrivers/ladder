@@ -10,11 +10,6 @@
     <version>1.0.0-SNAPSHOT</version>
     <distributionManagement>
         <repository>
-        <!--
-            <id>NEIDevOps</id>
-            <url>https://pkgs.dev.azure.com/NEIDevOps/_packaging/NEIDevOps/maven/v1</url>        
-        </repository>
-        -->
         </repository>
     </distributionManagement>
     

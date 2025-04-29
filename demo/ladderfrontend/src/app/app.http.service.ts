@@ -35,7 +35,7 @@ export class HttpService {
     const params = new HttpParams().set('ladderId', ladderId.toString());
     
     return this.http.get<Player[]>(
-      'http://localhost:8080/ladder/standings',
+      `${this.apiUrl}standings`,
       { params }
     ).pipe(
       catchError((error: any) => {
@@ -46,10 +46,12 @@ export class HttpService {
   }
 
   login(email: string, password: string): Observable<Player> {
-    const params = new HttpParams().set('email', email).set('password', password);
-    return this.http.get<Player>(
-      'http://localhost:8080/ladder/login',
-      { params }
+    const body = { email, password };
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<Player>(
+      `${this.apiUrl}login`,
+      body,
+      { headers }
     ).pipe(
       catchError((error: any) => {
         console.error('Error during login:', error);
@@ -109,7 +111,7 @@ export class HttpService {
 
   updatePlayer(player: Player): Observable<Player> {
     return this.http.put<Player>(
-      'http://localhost:8080/ladder/players',
+      `${this.apiUrl}players`,
       player
     ).pipe(
       catchError((error: any) => {

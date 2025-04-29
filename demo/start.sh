@@ -16,23 +16,28 @@ cleanup() {
 # Set up trap for cleanup
 trap cleanup SIGINT SIGTERM
 
-# Start backend
+# Debug: List current directory contents
+echo -e "${GREEN}Current directory contents:${NC}"
+ls -la
+
+# Start nginx in the background
+echo -e "${GREEN}Starting nginx...${NC}"
+nginx
+
+# Start the Spring Boot application
 echo -e "${GREEN}Starting backend application...${NC}"
-cd ladderbackend
-mvn spring-boot:run &
-BACKEND_PID=$!
+if [ -f "app.war" ]; then
+    # Set default database connection if not provided
+    export SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL:-"jdbc:postgresql://host.docker.internal:5432/demo"}
+    export SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME:-"postgres"}
+    export SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD:-"postgres"}
+    
+    java -jar app.war &
+    BACKEND_PID=$!
+else
+    echo -e "${RED}Error: app.war not found in current directory${NC}"
+    exit 1
+fi
 
-# Wait for backend to start
-echo -e "${GREEN}Waiting for backend to start...${NC}"
-sleep 15
-
-# Start frontend
-echo -e "${GREEN}Starting frontend application...${NC}"
-cd ../ladderfrontend
-mvn clean install -DskipTests
-npm start --prefix ../ladderfrontend -- --host 0.0.0.0 &
-FRONTEND_PID=$!
-echo -e "${GREEN}Frontend PID: ${FRONTEND_PID}${NC}"
-lsof -i :4200 >> start.log
 # Wait for both processes
-wait $BACKEND_PID $FRONTEND_PID
+wait $BACKEND_PID

@@ -107,9 +107,13 @@
 			}, ladderId);
 		}
 		public Player login(String email, String password){
-			return jdbcTemplate.queryForObject(LOGIN_QUERY, (rs, rowNum) -> {
-				return getPlayer(rs);
-			}, email, password);
+			try {
+				return jdbcTemplate.queryForObject(LOGIN_QUERY, (rs, rowNum) -> {
+					return getPlayer(rs);
+				}, email, password);
+			} catch (Exception e) {
+				return null;
+			}
 		}
 		private Player getPlayer(ResultSet rs) throws SQLException{
 			Player player = new Player();

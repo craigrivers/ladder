@@ -32,8 +32,8 @@ export class LandingComponent {
     this.errorMessage.set(null);
 
     // TODO: Replace with actual login API call
-    alert("Login request received for email: " + this.email() + " and password: " + this.password());
-    console.log("Login request received for email: " + this.email() + " and password: " + this.password());
+    
+    console.log("Login request received for email: " + this.email() );
     this.httpService.login(this.email().toLowerCase(), this.password()).subscribe({
       next: (player: Player) => {
         if (player) {

@@ -7,9 +7,6 @@ import java.io.IOException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.http.ResponseEntity;
 import java.util.Map;
 import java.util.HashMap;
@@ -35,20 +32,6 @@ public class LadderApplication {
     }
     public static void main(String[] args) {
       SpringApplication.run(LadderApplication.class, args);
-    }
-
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/ladder/**")
-                        .allowedOrigins("http://localhost:4200", "http://192.168.1.158:4200")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
-            }
-        };
     }
 
     @GetMapping("/hello")
@@ -94,15 +77,29 @@ public class LadderApplication {
 
   @GetMapping("/ladder/courts")
   public List<Court> getCourts() {
+    System.out.println("Getting courts");
     List <Court> courts = playerService.getCourts();
     return courts;
   }
 
-  @GetMapping("/ladder/login")
-  public Player login(@RequestParam String email, @RequestParam String password) {
-    System.out.println("Login request received for email: " + email );
-    return playerService.login(email, password);
-  } 
+  @PostMapping("/ladder/login")
+  public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
+    System.out.println("Login request received");
+    try {
+        String email = credentials.get("email");
+        String password = credentials.get("password");
+        System.out.println("Login request received for email: " + email);
+        Player player = playerService.login(email, password);
+        if (player != null) {
+            return ResponseEntity.ok(player);
+        } else {
+            return ResponseEntity.status(401).body("Invalid credentials");
+        }
+    } catch (Exception e) {
+        System.out.println("Login error: " + e.getMessage());
+        return ResponseEntity.status(500).body("Failed to login. Try again later.");
+    }
+  }
 
   @GetMapping("/ladder/scheduledMatches")
   public List<Match> getScheduledMatches(@RequestParam Integer ladderId) {

@@ -76,10 +76,15 @@ public class LadderApplication {
 	}
 
   @GetMapping("/ladder/courts")
-  public List<Court> getCourts() {
-    System.out.println("Getting courts");
-    List <Court> courts = playerService.getCourts();
-    return courts;
+  public ResponseEntity<List<Court>> getCourts() {
+    try {
+      System.out.println("Getting courts");
+      List<Court> courts = playerService.getCourts();
+      return ResponseEntity.ok(courts);
+    } catch (Exception e) {
+      System.out.println("Error getting courts: " + e.getMessage());
+      return ResponseEntity.status(500).body(null);
+    }
   }
 
   @PostMapping("/ladder/login")

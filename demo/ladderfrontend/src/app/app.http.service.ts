@@ -66,6 +66,9 @@ export class HttpService {
     ).pipe(
       catchError((error: any) => {
         console.error('Error fetching courts:', error);
+        if (error.status === 500) {
+          return throwError(() => new Error('Server error while fetching courts'));
+        }
         return throwError(() => new Error(error.message || 'Failed to fetch courts'));
       })
     );

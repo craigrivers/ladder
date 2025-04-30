@@ -7,6 +7,8 @@
 
 export const environment = {
   production: false,
-  url: 'http://ladder-app-a4ra.onrender.com',
-  apiUrl: 'http://ladder-app-a4ra.onrender.com/ladder/'
+  //url: 'https://ladder-app-a4ra.onrender.com',
+  //apiUrl: 'https://ladder-app-a4ra.onrender.com/ladder/'
+  url: '/',
+  apiUrl: 'http://localhost:8080/ladder/'
 };

@@ -113,43 +113,6 @@ export class PlayersComponent implements OnInit {
     });
   }
 
-  loadScheduledMatchesStatic(): void {
-    this.scheduledMatches.push({
-      matchId: 1,
-      player1Id: 1,
-      player1Name: 'Player 1',
-      player2Id: 2,
-      player2Name: 'Player 2',
-      player3Id: 3,
-      player3Name: 'Player 3',
-      player4Id: 4,
-      player4Name: 'Player 4',
-      matchDate: '2021-01-01',
-      courtName: 'Court 1',
-      ladderId: 1,
-      matchType: 'Singles',
-      courtId: 1,
-      matchScheduledStatus: 'Scheduled',
-    }); 
-    this.scheduledMatches.push({
-      matchId: 2,
-      player1Id: 1,
-      player1Name: 'Player 1',
-      player2Id: 2,
-      player2Name: 'Player 2',
-      player3Id: 3,
-      player3Name: 'Player 3',
-      player4Id: 4,
-      player4Name: 'Player 4',
-      matchDate: '2021-01-01',
-      courtName: 'Court 2',
-      ladderId: 1,
-      matchType: 'Singles',
-      courtId: 2,
-      matchScheduledStatus: 'Scheduled',
-    });
-  }
-
   loadPlayers(): void {
     this.http.getPlayers(1).subscribe({
       next: (data) => {

@@ -32,7 +32,7 @@ public class PlayerService {
         Integer playerId = this.playerDao.save(player);
         this.playerDao.addPlayerToLadder(playerId, player.getLadderId());
     }
-    public List<Player> getPlayersByLadderId(Integer ladderId){
+    public List<Player> getPlayersByLadderId(Integer ladderId){           
         return this.playerDao.getPlayersByLadderId(ladderId);
     }   
     public List<Standing> getStandingsByLadderId(Integer ladderId){
@@ -47,6 +47,7 @@ public class PlayerService {
     }   
 
     public Player login(String email, String password){
+        System.out.println("PlayerService: Login request received for email: " + email);
         return this.playerDao.login(email, password);
     }
 }

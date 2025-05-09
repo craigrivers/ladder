@@ -11,25 +11,37 @@ import org.springframework.http.ResponseEntity;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 import com.example.demo.domain.Player;
 import com.example.demo.domain.Standing;
 import com.example.demo.domain.Court;
 import com.example.demo.service.PlayerService;
 import com.example.demo.service.MatchService;
 import com.example.demo.domain.Match;
+import com.example.demo.dto.LoginRequest;
+import com.example.demo.dto.ErrorResponse;
+import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 
 @SpringBootApplication
 @RestController
 public class LadderApplication {
 
-  @Autowired
+    @Autowired
     private PlayerService playerService;
+    
+    @Autowired
     private MatchService matchService;
 
-    LadderApplication (PlayerService playerService, MatchService matchService){
+    private static final Logger log = LoggerFactory.getLogger(LadderApplication.class);
+
+    public LadderApplication(PlayerService playerService, MatchService matchService) {
         this.playerService = playerService;
         this.matchService = matchService;
     }
+
     public static void main(String[] args) {
       SpringApplication.run(LadderApplication.class, args);
     }
@@ -76,28 +88,31 @@ public class LadderApplication {
 	}
 
   @GetMapping("/ladder/courts")
-  public List<Court> getCourts() {
-    System.out.println("Getting courts");
-    List <Court> courts = playerService.getCourts();
-    return courts;
+  public ResponseEntity<List<Court>> getCourts() {
+    try {
+      log.info("Getting courts");
+      List<Court> courts = playerService.getCourts();
+      return ResponseEntity.ok(courts);
+    } catch (Exception e) {
+      log.error("Error fetching courts: {}", e.getMessage(), e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
   }
 
   @PostMapping("/ladder/login")
-  public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
-    System.out.println("Login request received");
+  public ResponseEntity<?> login(@Valid @RequestBody LoginRequest credentials) {
     try {
-        String email = credentials.get("email");
-        String password = credentials.get("password");
-        System.out.println("Login request received for email: " + email);
-        Player player = playerService.login(email, password);
+      log.info("Login request received for email: {}", credentials.getEmail());
+        Player player = playerService.login(credentials.getEmail(), credentials.getPassword());
         if (player != null) {
             return ResponseEntity.ok(player);
-        } else {
-            return ResponseEntity.status(401).body("Invalid credentials");
         }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            .body(new ErrorResponse("Invalid credentials"));
     } catch (Exception e) {
-        System.out.println("Login error: " + e.getMessage());
-        return ResponseEntity.status(500).body("Failed to login. Try again later.");
+        log.error("Login error for email {}: {}", credentials.getEmail(), e.getMessage(), e);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(new ErrorResponse("Authentication service unavailable"));
     }
   }
 

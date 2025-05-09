@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpUrlEncodingCodec } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { catchError, throwError } from 'rxjs';
 import { Player, Court, Match } from './ladderObjects';
 
@@ -13,21 +13,40 @@ export class HttpService {
 
   constructor(http: HttpClient) {
     this.http = http;
+    console.log('HTTP Service initialized with API URL:', this.apiUrl);
+  }
+
+  private getHeaders(): HttpHeaders {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json');
+    
+    console.log('Generated headers:', headers.keys());
+    return headers;
+  }
+
+  private logRequest(method: string, url: string, headers: HttpHeaders, body?: any) {
+    console.log(`Making ${method} request to:`, url);
+    console.log('Request headers:', headers.keys());
+    console.log('Request body:', body);
+  }
+
+  private logResponse(response: any) {
+    console.log('Response received:', response);
   }
 
   register(player: Player): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     console.log("JSON String = " + JSON.stringify(player));
     
     return this.http.post(
       `${this.apiUrl}register`,
       player,
-      { headers }
+      { 
+        headers: this.getHeaders(),
+        withCredentials: true
+      }
     ).pipe(
-      catchError((error: any) => {
-        console.error('Error during registration:', error);
-        return throwError(() => new Error(error.message || 'Registration failed'));
-      })
+      catchError(this.handleError)
     );
   }
 
@@ -36,40 +55,45 @@ export class HttpService {
     
     return this.http.get<Player[]>(
       `${this.apiUrl}standings`,
-      { params }
+      { 
+        params,
+        headers: this.getHeaders(),
+        withCredentials: true
+      }
     ).pipe(
-      catchError((error: any) => {
-        console.error('Error fetching standings:', error);
-        return throwError(() => new Error(error.message || 'Failed to fetch standings'));
-      })
+      catchError(this.handleError)
     );
   }
 
   login(email: string, password: string): Observable<Player> {
     const body = { email, password };
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<Player>(
       `${this.apiUrl}login`,
       body,
-      { headers }
+      { 
+        headers: this.getHeaders(),
+        withCredentials: true
+      }
     ).pipe(
-      catchError((error: any) => {
-        console.error('Error during login:', error);
-        return throwError(() => new Error(error.message || 'Login failed'));
-      })
+      catchError(this.handleError)
     );
   } 
 
   getCourts(): Observable<Court[]> {
+    const headers = this.getHeaders();
+    this.logRequest('GET', `${this.apiUrl}courts`, headers);
+    
     return this.http.get<Court[]>(
-      `${this.apiUrl}courts`
+      `${this.apiUrl}courts`,
+      { 
+        headers,
+        withCredentials: true
+      }
     ).pipe(
-      catchError((error: any) => {
+      tap(response => this.logResponse(response)),
+      catchError(error => {
         console.error('Error fetching courts:', error);
-        if (error.status === 500) {
-          return throwError(() => new Error('Server error while fetching courts'));
-        }
-        return throwError(() => new Error(error.message || 'Failed to fetch courts'));
+        return this.handleError(error);
       })
     );
   }
@@ -77,24 +101,26 @@ export class HttpService {
   scheduleMatch(match: Match): Observable<Match> {
     return this.http.post<Match>(
       `${this.apiUrl}addMatch`,
-      match
+      match,
+      { 
+        headers: this.getHeaders(),
+        withCredentials: true
+      }
     ).pipe(
-      catchError((error: any) => {
-        console.error('Error scheduling match:', error);
-        return throwError(() => new Error(error.message || 'Failed to schedule match'));
-      })
+      catchError(this.handleError)
     );
   }
 
   updateMatch(match: Match): Observable<Match> {
     return this.http.post<Match>(
       `${this.apiUrl}updateMatch`,
-      match
+      match,
+      { 
+        headers: this.getHeaders(),
+        withCredentials: true
+      }
     ).pipe(
-      catchError((error: any) => {
-        console.error('Error updating match:', error);
-        return throwError(() => new Error(error.message || 'Failed to update match'));
-      })
+      catchError(this.handleError)
     );
   }
 
@@ -103,24 +129,26 @@ export class HttpService {
     
     return this.http.get<Player[]>(
       `${this.apiUrl}players`,
-      { params }
+      { 
+        params,
+        headers: this.getHeaders(),
+        withCredentials: true
+      }
     ).pipe(
-      catchError((error: any) => {
-        console.error('Error fetching standings:', error);
-        return throwError(() => new Error(error.message || 'Failed to fetch standings'));
-      })
+      catchError(this.handleError)
     );
   }
 
   updatePlayer(player: Player): Observable<Player> {
     return this.http.put<Player>(
       `${this.apiUrl}players`,
-      player
+      player,
+      { 
+        headers: this.getHeaders(),
+        withCredentials: true
+      }
     ).pipe(
-      catchError((error: any) => {
-        console.error('Error updating player:', error);
-        return throwError(() => new Error(error.message || 'Failed to update player'));
-      })
+      catchError(this.handleError)
     );
   }
 
@@ -128,20 +156,24 @@ export class HttpService {
     const params = new HttpParams().set('ladderId', ladderId.toString());
     return this.http.get<Match[]>(
       `${this.apiUrl}scheduledMatches`,
-      { params }
+      { 
+        params,
+        headers: this.getHeaders(),
+        withCredentials: true
+      }
     ).pipe(
-      catchError((error: any) => {
-        console.error('Error fetching scheduled matches:', error);
-        return throwError(() => new Error(error.message || 'Failed to fetch scheduled matches'));
-      })
+      catchError(this.handleError)
     );
   }
 
   private handleError(error: any) {
+    console.error('API Error:', error);
+    if (error.status === 0) {
+      return throwError(() => new Error('Unable to connect to the server. Please check your network connection.'));
+    }
     if (error.status === 500) {
       return throwError(() => new Error('Internal Server Error'));
     }
     return throwError(() => new Error(error.message || error.text() || 'The server is not responding with data'));
   }
-
 }

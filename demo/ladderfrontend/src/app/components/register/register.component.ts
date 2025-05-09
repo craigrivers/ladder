@@ -68,6 +68,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
+    this.player.email = this.player.email.toLowerCase();
     console.log('Form submitted:', this.player);
     this.httpService.register(this.player).subscribe({
       next: (response) => {

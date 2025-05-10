@@ -16,6 +16,11 @@ export const routes: Routes = [
     component: PlayersComponent,
     data: { page: 'players' }
   },
+  { 
+    path: 'update-availability', 
+    component: PlayersComponent,
+    data: { page: 'update-availability' }
+  },
   { path: 'register', component: RegisterComponent },
   { path: 'report-scores', component: ReportScoresComponent },
   { path: '', component: LandingComponent }

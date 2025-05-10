@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Player, Court } from '../../ladderObjects';
 import { HttpService } from '../../app.http.service';
 import { CommonModule } from '@angular/common';
+import { PlayerService } from '../../services/player.service';
 
 @Component({
   selector: 'app-register',
@@ -43,12 +44,17 @@ export class RegisterComponent implements OnInit {
   courts: Court[] = [];
   isLoading = true;
   error: string | null = null;
+  currentPlayer: Player | null = null;
 
   constructor (
     public httpService: HttpService,
-    private router: Router
-  ) {}
-
+    private router: Router,
+    private playerService: PlayerService
+  ) 
+  {
+    this.currentPlayer = this.playerService.player;
+  }
+  
   ngOnInit(): void {
     this.loadCourts();
   }
@@ -72,8 +78,9 @@ export class RegisterComponent implements OnInit {
     console.log('Form submitted:', this.player);
     this.httpService.register(this.player).subscribe({
       next: (response) => {
-        console.log('Registration successful:', response);
-        this.router.navigate(['/standing']);
+        console.log('Registration successful:', this.player.firstName + ' ' + this.player.lastName );
+        this.playerService.setPlayer(this.player);
+        this.router.navigate(['/players']);
       },
       error: (error) => {
         console.error('Registration failed:', error);

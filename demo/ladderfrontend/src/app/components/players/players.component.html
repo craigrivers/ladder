@@ -141,7 +141,7 @@
             <option value="">Select a player</option>
             <option *ngFor="let player of players" 
                     [value]="player.playerId"
-                    [disabled]="player.playerId === currentPlayer?.playerId">
+                    [disabled]="player.playerId === currentPlayer.playerId">
               {{ player.firstName }} {{ player.lastName }}
             </option>
           </select>

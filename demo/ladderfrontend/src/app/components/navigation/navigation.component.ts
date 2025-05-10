@@ -10,6 +10,9 @@ import { PlayerService } from '../../services/player.service';
   template: `
     <nav class="navigation">
       <ul>
+        <li>
+          <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        </li>
         <li *ngIf="!isLoggedIn()">
           <a routerLink="/register" routerLinkActive="active">Register</a>
         </li> 

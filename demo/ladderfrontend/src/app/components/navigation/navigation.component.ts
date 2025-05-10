@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { PlayerService } from '../../services/player.service';
 
 @Component({
   selector: 'app-navigation',
@@ -9,18 +10,21 @@ import { CommonModule } from '@angular/common';
   template: `
     <nav class="navigation">
       <ul>
-        <li>
-          <a routerLink="/standing" routerLinkActive="active">Standings</a>
-        </li>
-        <li>
-          <a routerLink="/players" routerLinkActive="active">Players</a>
-        </li>
-        <li>
-          <a routerLink="/report-scores" routerLinkActive="active">Report Scores</a>
-        </li>
-        <li>
+        <li *ngIf="!isLoggedIn()">
           <a routerLink="/register" routerLinkActive="active">Register</a>
         </li> 
+        <li *ngIf="isLoggedIn()">
+          <a routerLink="/players" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Schedule Matches</a>
+        </li>
+        <li *ngIf="isLoggedIn()">
+          <a routerLink="/update-availability" routerLinkActive="active">Update Availability</a>
+        </li>
+        <li *ngIf="isLoggedIn()">
+          <a routerLink="/report-scores" routerLinkActive="active">Report Scores</a>
+        </li>
+        <li *ngIf="isLoggedIn()">
+          <a routerLink="/standing" routerLinkActive="active">Standings</a>
+        </li>
       </ul>
     </nav>
   `,
@@ -58,4 +62,8 @@ import { CommonModule } from '@angular/common';
     }
   `]
 })
-export class NavigationComponent {} 
+export class NavigationComponent {
+  constructor(private playerService: PlayerService) {}
+
+  isLoggedIn = computed(() => this.playerService.player !== null);
+} 

@@ -1,63 +1,69 @@
 <div class="landing-container">
-  <div class="hero-section">
-    <h1>Welcome to the Tennis Ladder</h1>
-    <p class="subtitle">Join our competitive tennis community and climb the ranks!</p>
-    <button class="register-button" (click)="navigateToRegister()">Register Now</button>
-  </div>
+  <div class="top-sections">
+    <div class="landing-content">
+      <div class="hero-section">
+        <h1>Welcome to the Tennis Ladder</h1>
+        <p class="subtitle">Join our competitive tennis community and climb the ranks!</p>
+        <button class="register-button" (click)="navigateToRegister()">Register Now</button>
+      </div>
+    </div>
 
-  <div class="login-section">
-    <h2>Already a member? Sign in</h2>
-    <form (ngSubmit)="onLogin()" class="login-form">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          [ngModel]="email()"
-          (ngModelChange)="email.set($event)"
-          name="email"
-          required
-          placeholder="Enter your email"
-        />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          [ngModel]="password()"
-          (ngModelChange)="password.set($event)"
-          name="password"
-          required
-          placeholder="Enter your password"
-        />
-      </div>
-      <div *ngIf="errorMessage()" class="error-message">
-        {{ errorMessage() }}
-      </div>
-      <div *ngIf="isLoading()" class="loading">
-        Logging in...
-      </div>
-      <button type="submit" [disabled]="isLoading()" class="login-button">Sign In</button>
-    </form>
+    <div class="login-section">
+      <h2>Already a member? Sign in</h2>
+      <form (ngSubmit)="onLogin()" class="login-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            [ngModel]="email()"
+            (ngModelChange)="email.set($event)"
+            name="email"
+            required
+            placeholder="Enter your email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            [ngModel]="password()"
+            (ngModelChange)="password.set($event)"
+            name="password"
+            required
+            placeholder="Enter your password"
+          />
+        </div>
+        <div *ngIf="errorMessage()" class="error-message">
+          {{ errorMessage() }}
+        </div>
+        <div *ngIf="isLoading()" class="loading">
+          Logging in...
+        </div>
+        <button type="submit" [disabled]="isLoading()" class="login-button">Sign In</button>
+      </form>
+    </div>
   </div>
 
   <div class="info-section">
     <h2>About the Tennis Ladder</h2>
-    <p>
-      Our tennis ladder is a dynamic ranking system that allows players to challenge each other and move up or down based on match results. 
-      Here's how it works:
-    </p>
+
     <ul>
-      <li>Register: Provide your contact information, times your available to play, your prefered court, and your skill level to join the ladder</li>
-      <li>Challenge players to play matches</li>
-      <li>Report match scores to update your position</li>
-      <li>Climb the ladder by winning matches</li>
-      <li>View current standings and player profiles</li>
+      <li>Register: Provide your contact information, times your available to play, and your prefered court to join the ladder</li>
+      <li>Challenge players to play matches at least once a week.</li>
+      <li>Report match scores after winning a match</li>
+      <li>View current standings</li>
     </ul>
     <p>
-      The ladder is updated weekly, and players are encouraged to play at least one match per week to maintain their position.
-      Get started today and join our competitive tennis community!
+      Ladder play will begin 5/13/2025 and end 7/13/2025.  Register by 5/14/2025 to be included in the first round of matches.
     </p>
+    <ul>
+      <li>Ladder matches will be played based on the USTA 3 set format, where the 3rd set is played as a 10 point tiebreaker. Matches outdoors are played with no time limit.  Indoor matches will be limited to 2 hours.  If a match is interrupted due to darkness or rain the 2 players will agree upon a time to complete the match and complete it within a week.</li>
+      <li>Both players will be required to bring a can of balls to the match.</li>
+      <li>Players will be required to show up at least 10 minutes early for the match.</li>
+      <li>The winner of the match keeps the can of unused balls and reports the scores.</li>
+      <li>There will be a $20 charge to play in the Ladder and I will collect it when I play each person in the ladder</li>
+    </ul>
   </div>
 </div> 

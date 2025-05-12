@@ -1,6 +1,8 @@
 <div class="register-container">
   <h2>Register</h2>
-  
+  <p>
+    Remember the email address and password you enter below and use it to login to this site.  The cell number is used to contact you for matches.
+  </p>
   <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="firstName">First Name:</label>
@@ -68,7 +70,7 @@
         name="cell"
         [(ngModel)]="player.cell">
     </div>
-
+<!----
     <div class="form-group">
       <label for="level">Skill Level:</label>
       <input 
@@ -84,7 +86,7 @@
         <div *ngIf="level.errors?.['min'] || level.errors?.['max']">Skill level must be between 3.5 and 4.5</div>
       </div>
     </div>
-
+  --->
     <div class="form-group">
       <label for="court">Preferred Court:</label>
       <select 

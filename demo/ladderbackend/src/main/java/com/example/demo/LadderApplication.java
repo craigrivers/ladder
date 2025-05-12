@@ -90,7 +90,7 @@ public class LadderApplication {
   @GetMapping("/ladder/courts")
   public ResponseEntity<List<Court>> getCourts() {
     try {
-      log.info("Getting courts");
+ //     log.info("Getting courts");
       List<Court> courts = playerService.getCourts();
       return ResponseEntity.ok(courts);
     } catch (Exception e) {
@@ -132,6 +132,7 @@ public class LadderApplication {
 
   @PostMapping("/ladder/updateMatch")
   public void updateMatch(@RequestBody Match match) {
+    log.info("Updating match: {}", match);
     matchService.updateMatch(match);
   }
 }

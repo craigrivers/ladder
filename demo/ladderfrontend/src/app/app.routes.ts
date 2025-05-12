@@ -4,6 +4,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ReportScoresComponent } from './components/report-scores/report-scores.component';
 import { PlayersComponent } from './components/players/players.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { HomeComponent } from './components/home/home.component';
 
 export const routes: Routes = [
   { 
@@ -16,7 +17,13 @@ export const routes: Routes = [
     component: PlayersComponent,
     data: { page: 'players' }
   },
+  { 
+    path: 'update-availability', 
+    component: PlayersComponent,
+    data: { page: 'update-availability' }
+  },
   { path: 'register', component: RegisterComponent },
   { path: 'report-scores', component: ReportScoresComponent },
+  { path: 'home', component: HomeComponent },
   { path: '', component: LandingComponent }
 ];

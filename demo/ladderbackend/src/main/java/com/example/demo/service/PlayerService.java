@@ -39,7 +39,6 @@ public class PlayerService {
         return this.scoreDao.getStandingsByLadderId(ladderId);
     }
     public List<Court> getCourts(){
-        System.out.println("Getting courts");
         return this.courtDao.getCourts();
     }   
     public void update(Player player){

@@ -1,5 +1,5 @@
 <div class="players-container">
-  <div *ngIf="currentPlayer" class="current-player">
+  <div id="availabilityDiv" *ngIf="currentPlayer && page === 'update-availability'" class="current-player">
     <h3>Update Availability, {{ currentPlayer.firstName }} {{ currentPlayer.lastName }}</h3>
     <div class="player-info">
       <div class="form-group">
@@ -21,7 +21,7 @@
       </button>
     </div>
   </div>
-
+<div id="playersDiv" *ngIf="currentPlayer && page !== 'update-availability'" class="current-player">
   <h3>Players</h3>
 
   <div *ngIf="isLoading" class="loading">
@@ -141,7 +141,7 @@
             <option value="">Select a player</option>
             <option *ngFor="let player of players" 
                     [value]="player.playerId"
-                    [disabled]="player.playerId === currentPlayer?.playerId">
+                    [disabled]="player.playerId === currentPlayer.playerId">
               {{ player.firstName }} {{ player.lastName }}
             </option>
           </select>
@@ -176,5 +176,5 @@
       </form>
     </div>
   </div>
-
+</div>
 </div>

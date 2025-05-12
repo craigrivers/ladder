@@ -3,14 +3,33 @@
   margin: 0 auto;
   padding: 2rem;
   font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  min-height: calc(100vh - 4rem);
+}
+
+.top-sections {
+  display: flex;
+  gap: 2rem;
+  min-height: 400px;
+}
+
+.landing-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .hero-section {
+  flex: 1;
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 2rem;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   border-radius: 1rem;
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   h1 {
     font-size: 2.5rem;
@@ -40,7 +59,23 @@
   }
 }
 
-.login-section, .register-section {
+.login-section {
+  flex: 1;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.register-section {
   max-width: 400px;
   margin: 0 auto;
   padding: 2rem;
@@ -111,7 +146,6 @@ button {
 }
 
 .info-section {
-  margin-top: 3rem;
   padding: 2rem;
   background: #f8f9fa;
   border-radius: 8px;
@@ -125,6 +159,8 @@ button {
     color: #34495e;
     line-height: 1.6;
     margin-bottom: 1.5rem;
+    font-size: 1rem;
+    font-weight: normal;
   }
 
   ul {
@@ -135,6 +171,9 @@ button {
       margin-bottom: 0.5rem;
       padding-left: 1.5rem;
       position: relative;
+      font-size: 1rem;
+      font-weight: normal;
+      color: #34495e;
 
       &::before {
         content: "•";

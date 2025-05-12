@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Match, MatchScores, Player, Court } from '../../ladderObjects';
@@ -48,7 +48,8 @@ export class PlayersComponent implements OnInit {
   constructor(
     http: HttpService, 
     private route: ActivatedRoute,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private router: Router
   ) {
     this.http = http;
     this.currentPlayer = this.playerService.player;
@@ -155,15 +156,16 @@ export class PlayersComponent implements OnInit {
       this.error = 'No player selected';
       return;
     }
-
+    console.log('Updated availability:', this.updatedAvailability);
     const updatedPlayer = { ...this.currentPlayer, availability: this.updatedAvailability };
-    
+    console.log('Updated player:', updatedPlayer);
     this.http.updatePlayer(updatedPlayer).subscribe({
       next: (response) => {
         console.log('Availability updated successfully:', response);
         this.currentPlayer = updatedPlayer;
         this.playerService.setPlayer(updatedPlayer);
         this.loadPlayers(); // Refresh the players list
+        this.router.navigate(['/players']);
       },
       error: (err) => {
         this.error = 'Failed to update availability. Please try again later.';

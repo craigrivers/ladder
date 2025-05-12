@@ -25,8 +25,11 @@ RUN chmod +x /app/start_backend.sh
 
 # Set environment variables
 ENV SSL_ENABLED=false
-ENV PORT=8080
+ENV PORT=8081
 ENV SPRING_PROFILES_ACTIVE=prod
+ENV SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/ladder
+ENV SPRING_DATASOURCE_USERNAME=postgres
+ENV SPRING_DATASOURCE_PASSWORD=postgres
 
 # Expose ports
 EXPOSE $PORT

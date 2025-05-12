@@ -9,9 +9,12 @@
 	import java.sql.ResultSet;
 	import java.sql.SQLException;
 	import java.util.List;
+	import org.slf4j.Logger;
+	import org.slf4j.LoggerFactory;
 
 	@Repository
 	public class PlayerDaoImpl implements PlayerDao {
+		private static final Logger logger = LoggerFactory.getLogger(PlayerDaoImpl.class);
 		private final JdbcTemplate jdbcTemplate;
 
 		private static final String INSERT_INTO_PLAYER = "INSERT INTO PLAYER (first_name, last_name, password, cell, email, level, court_id, availability) " +
@@ -86,7 +89,9 @@
 		 * @param availability
 		 */
 		public void updatePlayer(Integer playerId, String availability) {
+			logger.info("Updating player availability - playerId: {}, availability: {}", playerId, availability);
 			this.jdbcTemplate.update(UPDATE_PLAYER, availability, playerId);
+			logger.info("Successfully updated player availability for playerId: {}", playerId);
 		}
 
 		@Override

@@ -7,6 +7,14 @@ import { Match, MatchScores, Player, Court } from '../../ladderObjects';
 import { HttpService } from '../../app.http.service';
 import { PlayerService } from '../../services/player.service';
 
+// Utility to format date for datetime-local input
+function toDatetimeLocalString(date: string | Date): string {
+  const d = typeof date === 'string' ? new Date(date) : date;
+  if (isNaN(d.getTime())) return '';
+  const pad = (n: number) => n.toString().padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
 @Component({
   selector: 'app-players',
   standalone: true,
@@ -23,7 +31,9 @@ export class PlayersComponent implements OnInit {
   http: HttpService;
   page: string = '';
   currentPlayer: Player | null = null;
+  
   scheduledMatches: Match[] = [];
+  myScheduledMatches: Match[] = [];
   matchScores: MatchScores[] = [];
   updatedAvailability: string = '';
 
@@ -98,20 +108,29 @@ export class PlayersComponent implements OnInit {
   loadScheduledMatches(): void {
     this.http.getScheduledMatches(1).subscribe({
       next: (data) => {
-        // Ensure each match has the correct courtId
+        // Ensure each match has the correct courtId and formatted date
         this.scheduledMatches = data.map(match => {
           const court = this.courts.find(c => c.name === match.courtName);
           if (court) {
             match.courtId = court.courtId;
           }
+          match.matchDate = toDatetimeLocalString(match.matchDate);
           return match;
         });
+        this.loadMyScheduledMatches();
       },
       error: (err) => {
         this.error = 'Failed to load scheduled matches. Please try again later.';
         console.error('Error loading scheduled matches:', err);
       }
     });
+  }
+
+  loadMyScheduledMatches(): void {
+    // Use the scheduledMatches array to find any matches that have the current player's id in the player1Id or player2Id field
+    this.myScheduledMatches = this.scheduledMatches
+      .filter(match => match.player1Id === this.currentPlayer?.playerId || match.player2Id === this.currentPlayer?.playerId)
+      .map(match => ({ ...match, matchDate: toDatetimeLocalString(match.matchDate) }));
   }
 
   loadPlayers(): void {

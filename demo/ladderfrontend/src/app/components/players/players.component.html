@@ -71,19 +71,22 @@
   </div>
   <div *ngIf="page === 'players'">
   <h3>My Scheduled Matches</h3>
-  <div *ngIf="scheduledMatches.length > 0">
-    <div *ngFor="let match of scheduledMatches" class="match-item">
+  <!-- Display the matches that the current player is scheduled to play in -->
+  <div id="myScheduledMatches" *ngIf="myScheduledMatches.length > 0">
+    <div *ngFor="let match of myScheduledMatches" class="match-item">
       <div class="match-details">
+        <div class="match-label">Match Date</div>
+        <div class="match-label">Court</div>
+        <div class="match-label">Players</div>
+        <div class="match-label">Action</div>
+
         <div class="form-group">
-          <label>Match Date</label>
           <input type="datetime-local" 
-                 [ngModel]="match.matchDate | date:'yyyy-MM-ddTHH:mm'"
-                 (ngModelChange)="match.matchDate = $event; updateMatch(match)"
+                 [(ngModel)]="match.matchDate"
+                 (ngModelChange)="updateMatch(match)"
                  class="match-input">
         </div>
-        
         <div class="form-group">
-          <label>Court</label>
           <select [(ngModel)]="match.courtId" 
                   (ngModelChange)="updateMatch(match)"
                   class="match-input">
@@ -93,8 +96,18 @@
             </option>
           </select>
         </div>
-        
-        <p class="match-players">{{ match.player1Name }} vs {{ match.player2Name }}</p>
+        <div class="form-group">
+          <p class="match-players">{{ match.player1Name }} vs {{ match.player2Name }}</p>
+        </div>
+        <div class="form-group">
+          <select [(ngModel)]="match.matchScheduledStatus"
+                  (ngModelChange)="updateMatch(match)"
+                  class="match-input">
+            <option value="updated">Updated</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="declined">Declined</option>
+          </select>
+        </div>
       </div>
     </div>
   </div>

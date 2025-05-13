@@ -122,8 +122,10 @@
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
   font-weight: 500;
+  font-size: 14px;
+  color: #666;
 }
 
 .form-group select,
@@ -232,25 +234,48 @@ button:disabled {
 
 .match-item {
   background-color: white;
-  padding: 20px;
+  padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .match-details {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  align-items: center;
+  grid-template-columns: 200px 220px 1fr 180px;
+  column-gap: 32px;
+  align-items: end;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.form-group label {
+  margin-bottom: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #666;
+  min-height: 18px;
+}
+
+.match-input[type='datetime-local'] {
+  min-width: 160px;
 }
 
 .match-input {
   width: 100%;
-  padding: 8px;
+  padding: 6px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 14px;
+}
+
+.match-input option {
+  font-size: 14px;
+  padding: 4px;
 }
 
 .match-input:focus {
@@ -263,4 +288,15 @@ button:disabled {
   margin: 0;
   font-weight: 500;
   color: #333;
+  font-size: 14px;
+}
+
+.match-label {
+  font-weight: 500;
+  font-size: 14px;
+  color: #666;
+  min-height: 18px;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: flex-end;
 }

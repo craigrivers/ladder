@@ -22,6 +22,10 @@ INSERT INTO COURT (NAME, ADDRESS, PHONE, LINK) VALUES ('Watkins', '301 Watkins P
 INSERT INTO COURT (NAME, ADDRESS, PHONE, LINK) VALUES ('Lake Arbor Park', '1100 Arbor Park Place Bowie, MD 20721', '', 'https://www.pgparks.com/parks_trails/arbor-park');
 INSERT INTO COURT (NAME, ADDRESS, PHONE, LINK) VALUES ('Lake Arbor Golf Course', '1401 Golf Course Dr Mitchellville, MD 20721', '', '');
 INSERT INTO COURT (NAME, ADDRESS, PHONE, LINK) VALUES ('Tucker Rd', '1771 Tucker Road, Fort Washington, MD 20744', ' (301) 248-4404','https://www.pgparks.com/facilities/tucker-road-community-center');
+INSERT INTO COURT (NAME, ADDRESS, PHONE, LINK) VALUES ('Tanglewood Community Park', '8339 Woodyard Road, Clinton, MD 20735', ' (301) 699-2400','https://www.pgparks.com/parks_trails/tanglewood-park');
+INSERT INTO COURT (NAME, ADDRESS, PHONE, LINK) VALUES ('Gwynn Park High School', '13800 Brandywine Road, Brandywine, MD 20613', ' 301-372-0140','https://www.pgcps.org/schools/gwynn-park-high');
+
+
 
 
 

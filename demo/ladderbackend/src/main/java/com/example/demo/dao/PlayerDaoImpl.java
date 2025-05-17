@@ -1,5 +1,5 @@
 	package com.example.demo.dao;
-	import com.example.demo.domain.Player;
+	import com.example.demo.model.Player;
 	import org.springframework.jdbc.core.JdbcTemplate;
 	import org.springframework.jdbc.support.GeneratedKeyHolder;
 	import org.springframework.jdbc.support.KeyHolder;
@@ -47,14 +47,23 @@
 			private static final String WHERE_LADDER_ID = """
 				WHERE pl.LADDER_ID = ?
 										""";
+		private static final String WHERE_PLAYER_ID = """
+				WHERE p.PLAYER_ID = ?
+										""";
 
 		private static final String LOGIN_QUERY = GET_PLAYERS + LOGIN_WHERE_EMAIL_AND_PASSWORD;
 		private static final String GET_PLAYERS_BY_LADDER_QUERY = GET_PLAYERS + WHERE_LADDER_ID;
+		private static final String GET_PLAYER_BY_ID_QUERY = GET_PLAYERS + WHERE_PLAYER_ID;
 
 
 		PlayerDaoImpl(JdbcTemplate jdbcTemplate){
 			this.jdbcTemplate = jdbcTemplate;
 		}
+		public Player getPlayerById(Integer playerId) {
+			return jdbcTemplate.queryForObject(GET_PLAYER_BY_ID_QUERY, (rs, rowNum) -> {
+				return getPlayer(rs);
+			}, playerId);
+		}	
 		public Integer save(Player player) {
 			KeyHolder keyHolder = new GeneratedKeyHolder();
 			

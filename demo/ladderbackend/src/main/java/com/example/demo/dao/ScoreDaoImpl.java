@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.domain.Standing;
+import com.example.demo.model.Standing;
 
 @Repository
 public class ScoreDaoImpl implements ScoreDao {

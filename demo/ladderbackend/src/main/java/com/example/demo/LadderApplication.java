@@ -12,18 +12,21 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
-import com.example.demo.domain.Player;
-import com.example.demo.domain.Standing;
-import com.example.demo.domain.Court;
+import com.example.demo.model.Player;
+import com.example.demo.model.Standing;
+import com.example.demo.model.Court;
 import com.example.demo.service.PlayerService;
 import com.example.demo.service.MatchService;
-import com.example.demo.domain.Match;
+import com.example.demo.model.Match;
 import com.example.demo.dto.LoginRequest;
+import com.example.demo.dto.NotificationRequest;
 import com.example.demo.dto.ErrorResponse;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import com.example.demo.dto.EmailRequest;
+import com.example.demo.service.EmailSenderService;
 
 @SpringBootApplication
 @RestController
@@ -35,11 +38,15 @@ public class LadderApplication {
     @Autowired
     private MatchService matchService;
 
+    @Autowired
+    private EmailSenderService emailSenderService;
+
     private static final Logger log = LoggerFactory.getLogger(LadderApplication.class);
 
-    public LadderApplication(PlayerService playerService, MatchService matchService) {
+    public LadderApplication(PlayerService playerService, MatchService matchService, EmailSenderService emailSenderService) {
         this.playerService = playerService;
         this.matchService = matchService;
+        this.emailSenderService = emailSenderService;
     }
 
     public static void main(String[] args) {
@@ -90,7 +97,6 @@ public class LadderApplication {
   @GetMapping("/ladder/courts")
   public ResponseEntity<List<Court>> getCourts() {
     try {
- //     log.info("Getting courts");
       List<Court> courts = playerService.getCourts();
       return ResponseEntity.ok(courts);
     } catch (Exception e) {
@@ -129,10 +135,49 @@ public class LadderApplication {
       response.put("message", "Match added successfully");
       return ResponseEntity.ok(response);
   }     
+/***
+  @PostMapping("/ladder/sendEmail")
+  public ResponseEntity<Map<String, String>> sendEmail(@RequestBody EmailRequest emailRequest) {
+    log.info("Sending email to: {}", emailRequest.getEmail());
+    emailSenderService.sendEmail(emailRequest.getEmail(), emailRequest.getSubject(), emailRequest.getMessage());
+    Map<String, String> response = new HashMap<>();
+    response.put("message", "Email sent successfully");
+    return ResponseEntity.ok(response);
+  }
+***/
 
+  @PostMapping("/ladder/sendNotification")
+  public ResponseEntity<Map<String, String>> sendNotification(@RequestBody NotificationRequest notificationRequest) {
+    log.info("Sending notification to: {}", notificationRequest.getMatch());
+    emailSenderService.sendNotification(notificationRequest.getMatch(), notificationRequest.getNotificationType(), notificationRequest.getLoginPlayer());
+    Map<String, String> response = new HashMap<>();
+    response.put("message", "Notification sent successfully");
+    return ResponseEntity.ok(response);
+  }
   @PostMapping("/ladder/updateMatch")
   public void updateMatch(@RequestBody Match match) {
     log.info("Updating match: {}", match);
     matchService.updateMatch(match);
+  }
+
+  @PostMapping("/ladder/updateMatch/sendNotification")
+  public ResponseEntity<Map<String, String>> updateMatchSendNotification(@RequestBody NotificationRequest notificationRequest) {
+    log.info("Updating match: {}", notificationRequest.getMatch());
+    try {
+      if (notificationRequest.getNotificationType().equals("add-match")) {
+        matchService.addMatch(notificationRequest.getMatch());
+      } else {      
+        matchService.updateMatch(notificationRequest.getMatch());
+      }  
+      emailSenderService.sendNotification(notificationRequest.getMatch(), notificationRequest.getNotificationType(), notificationRequest.getLoginPlayer());
+      Map<String, String> response = new HashMap<>();
+      response.put("message", "Match updated and notification sent successfully");
+      return ResponseEntity.ok(response);
+    } catch (Exception e) {
+      log.error("Error updating match: {}", e.getMessage(), e);
+      Map<String, String> response = new HashMap<>();
+      response.put("message", "Error updating match: " + e.getMessage());
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
   }
 }

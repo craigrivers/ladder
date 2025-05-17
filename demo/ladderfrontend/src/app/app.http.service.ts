@@ -97,7 +97,7 @@ export class HttpService {
       })
     );
   }
-
+/*
   scheduleMatch(match: Match): Observable<Match> {
     return this.http.post<Match>(
       `${this.apiUrl}addMatch`,
@@ -110,6 +110,22 @@ export class HttpService {
       catchError(this.handleError)
     );
   }
+*/
+  scheduleMatchSendNotification(match:Match, notificationType: string, loginPlayer: Player): Observable<Match> {
+    console.log("scheduleMatchSendNotification:" + " match: " + "player2: "+ match.player2Name  + " player1: " + match.player1Name + " court: " + match.courtName); 
+    const body = { match, notificationType, loginPlayer };
+    return this.http.post<Match>(
+      `${this.apiUrl}updateMatch/sendNotification`,
+      body,
+      { 
+        headers: this.getHeaders(),
+        withCredentials: true
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
   updateMatch(match: Match): Observable<Match> {
     return this.http.post<Match>(
@@ -162,6 +178,26 @@ export class HttpService {
         withCredentials: true
       }
     ).pipe(
+      catchError(this.handleError)
+    );
+  }
+/*
+  sendEmail(email: string, subject: string, message: string): Observable<any> {
+    const body = { email, subject, message };
+    return this.http.post(`${this.apiUrl}sendEmail`, body, {
+      headers: this.getHeaders(),
+      withCredentials: true
+    }).pipe(  
+      catchError(this.handleError)
+    );
+  }
+*/
+  sendNotification(match:Match, notificationType: string, loginPlayer: Player): Observable<any> {
+    const body = { match, notificationType, loginPlayer };
+    return this.http.post(`${this.apiUrl}sendNotification`, body, {
+      headers: this.getHeaders(),
+      withCredentials: true
+    }).pipe(  
       catchError(this.handleError)
     );
   }

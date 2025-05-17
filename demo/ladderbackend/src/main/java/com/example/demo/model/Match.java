@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.example.demo.model;
 
 import java.sql.Timestamp;
 
@@ -163,4 +163,35 @@ public class Match {
     public void setCourtName(String courtName) {
         this.courtName = courtName;
     }
+
+    @Override
+    public String toString() {
+        return "Match{" +
+                "matchId=" + matchId +
+                ", ladderId=" + ladderId +
+                ", matchType='" + matchType + '\'' +
+                ", player1Id=" + player1Id +
+                ", player2Id=" + player2Id +
+                ", courtId=" + courtId +
+                ", matchDate=" + matchDate +
+                ", player1Name='" + player1Name + '\'' +
+                ", player2Name='" + player2Name + '\'' +
+                ", player3Id=" + player3Id +
+                ", player3Name='" + player3Name + '\'' +
+                ", player4Id=" + player4Id +
+                ", player4Name='" + player4Name + '\'' +
+                ", matchScheduledStatus='" + matchScheduledStatus + '\'' +
+                ", courtName='" + courtName + '\'' +
+                '}';
+    }
+
+    public String getMatchDetails() {
+            return 
+                    " \n Match Date: " + matchDate +
+                    " \n Player 1: " + player1Name + 
+                    " \n Player 2: " + player2Name +                   
+                    " \n Court Name: " + courtName +
+                    " \n Match Scheduled Status:" + matchScheduledStatus ;
+    }
+
 }

@@ -122,8 +122,10 @@
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
   font-weight: 500;
+  font-size: 14px;
+  color: #666;
 }
 
 .form-group select,
@@ -232,25 +234,36 @@ button:disabled {
 
 .match-item {
   background-color: white;
-  padding: 20px;
+  padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .match-details {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.match-input {
+.form-group {
+  flex: 1 1 180px;
+  min-width: 150px;
+  max-width: 100%;
+}
+
+.match-input,
+.match-input[type='datetime-local'] {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.match-input option {
+  font-size: 14px;
+  padding: 4px;
 }
 
 .match-input:focus {
@@ -263,4 +276,45 @@ button:disabled {
   margin: 0;
   font-weight: 500;
   color: #333;
+  font-size: 14px;
+}
+
+.match-label {
+  font-weight: 500;
+  font-size: 14px;
+  color: #666;
+  min-height: 18px;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: flex-end;
+}
+
+@media (max-width: 600px) {
+  .match-details {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .match-item {
+    padding: 6px;
+    margin-bottom: 6px;
+  }
+  .form-group {
+    margin-bottom: 2px;
+  }
+  .form-group label {
+    margin-bottom: 1px;
+    font-size: 13px;
+  }
+  .match-input,
+  .match-input[type='datetime-local'] {
+    padding: 0.25rem;
+    font-size: 0.95rem;
+  }
+  .current-player {
+    padding: 8px;
+  }
+  .match-players {
+    font-size: 13px;
+    margin-bottom: 0;
+  }
 }

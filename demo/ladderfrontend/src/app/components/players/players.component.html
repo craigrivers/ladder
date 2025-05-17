@@ -71,17 +71,17 @@
   </div>
   <div *ngIf="page === 'players'">
   <h3>My Scheduled Matches</h3>
-  <div *ngIf="scheduledMatches.length > 0">
-    <div *ngFor="let match of scheduledMatches" class="match-item">
+  <!-- Display the matches that the current player is scheduled to play in -->
+  <div id="myScheduledMatches" *ngIf="myScheduledMatches.length > 0">
+    <div *ngFor="let match of myScheduledMatches" class="match-item">
       <div class="match-details">
         <div class="form-group">
           <label>Match Date</label>
-          <input type="datetime-local" 
-                 [ngModel]="match.matchDate | date:'yyyy-MM-ddTHH:mm'"
-                 (ngModelChange)="match.matchDate = $event; updateMatch(match)"
+          <input id="matchDate" type="datetime-local" 
+                 [(ngModel)]="match.matchDate"
+                 (ngModelChange)="updateMatch(match)"
                  class="match-input">
         </div>
-        
         <div class="form-group">
           <label>Court</label>
           <select [(ngModel)]="match.courtId" 
@@ -93,8 +93,26 @@
             </option>
           </select>
         </div>
-        
-        <p class="match-players">{{ match.player1Name }} vs {{ match.player2Name }}</p>
+        <div class="form-group">
+          <label>Players</label>
+          <p class="match-players">{{ match.player1Name }} vs {{ match.player2Name }}</p>
+        </div>
+        <div class="form-group">
+          <label>Schedule Status</label>
+          <select [(ngModel)]="match.matchScheduledStatus"
+                  (ngModelChange)="updateMatch(match)"
+                  class="match-input">
+            <option value="scheduled">Scheduled</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="updated">Updated</option>
+            <option value="declined">Declined</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Send Email</label>
+          <button type="button" (click)="sendNotification(match, 'match-update')">Send Email</button>
+        </div>
       </div>
     </div>
   </div>
@@ -124,7 +142,6 @@
     
     <!-- Match Scheduling Form -->
     <div class="match-scheduling-form">
-      <h3>Schedule a Match</h3>
       <form (ngSubmit)="scheduleMatch()">
         <div class="form-group">
           <label for="player1">Player 1</label>

@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.example.demo.model;
 
 public class Player {
     String firstName;
@@ -144,5 +144,26 @@ public class Player {
     
     public void setCourtName(String courtName) {
         this.courtName = courtName;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerId=" + playerId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", goesBy='" + goesBy + '\'' +
+                ", email='" + email + '\'' +
+                ", cell='" + cell + '\'' +
+                ", level=" + level +
+                ", ladderId=" + ladderId +
+                ", courtId=" + courtId +
+                ", courtName='" + courtName + '\'' +
+                ", availability='" + availability + '\'' +
+                ", matchesWon=" + matchesWon +
+                ", matchesLost=" + matchesLost +
+                ", gamesWon=" + gamesWon +
+                ", gamesLost=" + gamesLost +
+                '}';
     }
 }

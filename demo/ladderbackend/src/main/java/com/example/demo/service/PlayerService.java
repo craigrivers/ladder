@@ -1,6 +1,6 @@
 package com.example.demo.service;
-    import com.example.demo.domain.Player;
-import com.example.demo.domain.Standing;
+import com.example.demo.model.Player;
+import com.example.demo.model.Standing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,7 +8,7 @@ import java.util.List;
 import com.example.demo.dao.PlayerDaoImpl;
 import com.example.demo.dao.ScoreDaoImpl;
 import com.example.demo.dao.CourtDaoImpl;
-import com.example.demo.domain.Court;   
+import com.example.demo.model.Court;   
 
 @Service
 @Transactional

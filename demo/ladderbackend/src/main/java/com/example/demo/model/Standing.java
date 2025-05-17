@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.example.demo.model;
 
 public class Standing {
     private Integer ladderId;

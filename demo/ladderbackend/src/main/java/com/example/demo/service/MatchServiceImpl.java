@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.domain.Match;
+import com.example.demo.model.Match;
 import com.example.demo.dao.MatchDao;
 import java.util.List;
 import org.springframework.stereotype.Service;

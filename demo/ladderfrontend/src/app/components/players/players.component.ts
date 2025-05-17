@@ -9,10 +9,28 @@ import { PlayerService } from '../../services/player.service';
 
 // Utility to format date for datetime-local input
 function toDatetimeLocalString(date: string | Date): string {
-  const d = typeof date === 'string' ? new Date(date) : date;
-  if (isNaN(d.getTime())) return '';
+  let d: Date;
+  if (typeof date === 'string') {
+    // Create date object from UTC string
+    d = new Date(date);
+  } else {
+    d = date;
+  }
+  
+  console.log('Parsed date:', d);
+  if (isNaN(d.getTime())) {
+    console.log('Invalid date detected');
+    return '';
+  }
+  
   const pad = (n: number) => n.toString().padStart(2, '0');
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  // Use UTC time directly
+  const result = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`;
+  return result;
+}
+
+function noChange(date: string): string {
+  return date;
 }
 
 @Component({
@@ -36,6 +54,7 @@ export class PlayersComponent implements OnInit {
   myScheduledMatches: Match[] = [];
   matchScores: MatchScores[] = [];
   updatedAvailability: string = '';
+  player2: Player | null = null;
 
   newMatch: Match = { 
     matchId: 0,
@@ -130,7 +149,7 @@ export class PlayersComponent implements OnInit {
     // Use the scheduledMatches array to find any matches that have the current player's id in the player1Id or player2Id field
     this.myScheduledMatches = this.scheduledMatches
       .filter(match => match.player1Id === this.currentPlayer?.playerId || match.player2Id === this.currentPlayer?.playerId)
-      .map(match => ({ ...match, matchDate: toDatetimeLocalString(match.matchDate) }));
+      .map(match => ({ ...match, matchDate: noChange(match.matchDate) }));
   }
 
   loadPlayers(): void {
@@ -153,11 +172,32 @@ export class PlayersComponent implements OnInit {
       return;
     }
 
+    if (!this.currentPlayer) {
+      this.error = 'No player is logged in ';
+      return;
+    }
+
+    if (this.players.length === 0) {
+      this.error = 'Players data is not yet loaded. Please try again in a moment.';
+      return;
+    }
+
     this.newMatch.ladderId = 1; // Assuming ladderId 1 for now
     this.newMatch.matchType = 'Singles'; // Default to singles for now
-    this.newMatch.matchScheduledStatus = 'Scheduled';
+    this.newMatch.matchScheduledStatus = 'scheduled';
 
-    this.http.scheduleMatch(this.newMatch).subscribe({
+    this.player2 = this.players.find(
+      p => Number(p.playerId) === Number(this.newMatch.player2Id)
+    ) || null;
+    if (!this.player2) {
+      this.error = 'Selected player not found. Please try again.';
+      return;
+    }
+
+    this.newMatch.player2Name = this.player2?.firstName + ' ' + this.player2?.lastName || '';
+    this.newMatch.courtName = this.courts.find(c => Number(c.courtId) === Number(this.newMatch.courtId))?.name || ''; 
+
+    this.http.scheduleMatchSendNotification(this.newMatch, "add-match", this.currentPlayer).subscribe({ 
       next: (response) => {
         console.log('Match scheduled successfully:', response);
         this.loadScheduledMatches();
@@ -177,7 +217,6 @@ export class PlayersComponent implements OnInit {
     }
     console.log('Updated availability:', this.updatedAvailability);
     const updatedPlayer = { ...this.currentPlayer, availability: this.updatedAvailability };
-    console.log('Updated player:', updatedPlayer);
     this.http.updatePlayer(updatedPlayer).subscribe({
       next: (response) => {
         console.log('Availability updated successfully:', response);
@@ -195,7 +234,7 @@ export class PlayersComponent implements OnInit {
 
   updateMatch(match: Match): void {
     // Update courtName based on selected courtId
-    const selectedCourt = this.courts.find(court => court.courtId === match.courtId);
+    const selectedCourt = this.courts.find(court => Number(court.courtId) === Number(match.courtId));
     if (selectedCourt) {
       match.courtName = selectedCourt.name;
     }
@@ -203,7 +242,7 @@ export class PlayersComponent implements OnInit {
     this.http.updateMatch(match).subscribe({
       next: (response) => {
         console.log('Match updated successfully:', response);
-        this.loadScheduledMatches(); // Refresh the matches list
+        this.loadScheduledMatches();
       },
       error: (err) => {
         this.error = 'Failed to update match. Please try again later.';
@@ -231,4 +270,21 @@ export class PlayersComponent implements OnInit {
       matchScheduledStatus: ''
     };
   }
-} 
+
+  sendNotification(match:Match, notificationType: string): void {
+    if (!this.currentPlayer) {
+      this.error = 'User is not logged in';
+      console.error('Error sending notification:', this.error);
+      return;
+    }
+    this.http.sendNotification(match, notificationType, this.currentPlayer).subscribe({
+      next: (response) => {
+        alert('Email sent successfully');
+      },
+      error: (err) => {
+        this.error = 'Failed to send email. Please try again later.';
+        console.error('Error sending email:', err);
+      }
+    });
+  }   
+}

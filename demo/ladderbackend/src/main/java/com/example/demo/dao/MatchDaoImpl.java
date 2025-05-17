@@ -1,7 +1,7 @@
 package com.example.demo.dao;
 
 import java.util.List;
-import com.example.demo.domain.Match;
+import com.example.demo.model.Match;
 import org.springframework.jdbc.core.JdbcTemplate;  
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;

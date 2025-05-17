@@ -1,7 +1,7 @@
 package com.example.demo.dao;
 
 import java.util.List;
-import com.example.demo.domain.Match;
+import com.example.demo.model.Match;
 
 public interface MatchDao {
 

@@ -48,19 +48,19 @@ public class MatchDaoImpl implements MatchDao {
         """;
 
     @Override
-    public List<Match> getScheduledMatches(Integer ladderId) { 
+    public List<Match> getScheduledMatches(Long ladderId) { 
         return jdbcTemplate.query(GET_SCHEDULED_MATCHES, new Object[]{ladderId}, (rs, rowNum) -> {
             return new Match(
-                rs.getInt("MATCH_ID"),
-                rs.getInt("LADDER_ID"),
+                rs.getLong("MATCH_ID"),
+                rs.getLong("LADDER_ID"),
                 rs.getString("MATCH_TYPE"),
-                rs.getInt("PLAYER1_ID"),
+                rs.getLong("PLAYER1_ID"),
                 rs.getString("PLAYER1_NAME"),
-                rs.getInt("PLAYER2_ID"),
+                rs.getLong("PLAYER2_ID"),
                 rs.getString("PLAYER2_NAME"),
-                rs.getInt("PLAYER3_ID"),
+                rs.getLong("PLAYER3_ID"),
                 rs.getString("PLAYER3_NAME"),
-                rs.getInt("PLAYER4_ID"),
+                rs.getLong("PLAYER4_ID"),
                 rs.getString("PLAYER4_NAME"),
                 rs.getString("MATCH_DATE"),
                 rs.getString("MATCH_SCHEDULED_STATUS"),
@@ -74,23 +74,23 @@ public class MatchDaoImpl implements MatchDao {
     }
 */
     @Override
-    public Integer addMatch(Match match) {
+    public Long addMatch(Match match) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(ADD_MATCH_GENERATED_KEY, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, match.getPlayer1Id());
-            ps.setInt(2, match.getPlayer2Id());
-            ps.setInt(3, match.getPlayer3Id());
-            ps.setInt(4, match.getPlayer4Id());
-            ps.setInt(5, match.getCourtId());
+            ps.setLong(1, match.getPlayer1Id());
+            ps.setLong(2, match.getPlayer2Id());
+            ps.setLong(3, match.getPlayer3Id());
+            ps.setLong(4, match.getPlayer4Id());
+            ps.setLong(5, match.getCourtId());
             ps.setTimestamp(6, match.getMatchDate());
             ps.setString(7, match.getMatchScheduledStatus());
-            ps.setInt(8, match.getLadderId());
+            ps.setLong(8, match.getLadderId());
             return ps;
         }, keyHolder);  
         
-        return keyHolder.getKey().intValue();
+        return keyHolder.getKey().longValue();
     }
 
     @Override
@@ -99,8 +99,8 @@ public class MatchDaoImpl implements MatchDao {
             PreparedStatement ps = connection.prepareStatement(UPDATE_MATCH);
             ps.setString(1, match.getMatchScheduledStatus());
             ps.setTimestamp(2, match.getMatchDate());
-            ps.setInt(3, match.getCourtId());
-            ps.setInt(4, match.getMatchId());
+            ps.setLong(3, match.getCourtId());
+            ps.setLong(4, match.getMatchId());
             return ps;
         });
     }

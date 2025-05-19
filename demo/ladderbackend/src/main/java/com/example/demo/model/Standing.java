@@ -1,8 +1,8 @@
 package com.example.demo.model;
 
 public class Standing {
-    private Integer ladderId;
-    private Integer playerId;
+    private Long ladderId;
+    private Long playerId;
     private String firstName; 
     private String lastName;
     private String goesBy;
@@ -11,19 +11,19 @@ public class Standing {
     private Integer gamesWon;
     private Integer gamesLost;
       
-    public Integer getLadderId() {
+    public Long getLadderId() {
         return ladderId;
     }
 
-    public void setLadderId(Integer ladderId) {
+    public void setLadderId(Long ladderId) {
         this.ladderId = ladderId;
     }
 
-    public Integer getPlayerId() {
+    public Long getPlayerId() {
         return playerId;
     }
 
-    public void setPlayerId(Integer playerId) {
+    public void setPlayerId(Long playerId) {
         this.playerId = playerId;
     }
 

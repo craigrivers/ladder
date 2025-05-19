@@ -10,7 +10,7 @@ import jakarta.validation.constraints.Positive;
  */
 public class Court {
     @Positive
-    private int courtId;
+    private long courtId;
 
     @NotBlank(message = "Court name is required")
     private String name;
@@ -41,7 +41,7 @@ public class Court {
      * @param link URL to the court's website
      * @param phone Contact phone number
      */
-    public Court(int courtId, String name, String address, String link, String phone) {
+    public Court(long courtId, String name, String address, String link, String phone) {
         this.courtId = courtId;
         this.name = name;
         this.address = address;
@@ -50,8 +50,8 @@ public class Court {
     }
 
     // Getters and Setters
-    public int getCourtId() { return courtId; }
-    public void setCourtId(int courtId) { this.courtId = courtId; }
+    public long getCourtId() { return courtId; }
+    public void setCourtId(long courtId) { this.courtId = courtId; }
     
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }

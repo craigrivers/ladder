@@ -3,5 +3,5 @@ import com.example.demo.model.Standing;
 import java.util.List;  
 
 public interface ScoreDao {
-    List<Standing> getStandingsByLadderId(Integer ladderId);
+    List<Standing> getStandingsByLadderId(Long ladderId);
 }

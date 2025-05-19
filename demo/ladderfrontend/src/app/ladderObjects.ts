@@ -60,6 +60,14 @@ export interface Match {
     matchScheduledStatus: string;
     courtName: string; }
 
+    export interface SetScores {
+        matchId: number;
+        playerId: number;
+        score: number;
+        set_number: number;
+        setWinner: number;
+    }
+
     export interface MatchScores {
         matchId: number;
         player1Id: number;
@@ -67,10 +75,32 @@ export interface Match {
         player3Id: number;      
         player4Id: number;
         player1Score: number;
+        player1SetWinner: number;       // 0 = loser, 1 = winner
         player2Score: number;
+        player2SetWinner: number;
         player3Score: number;
+        player3SetWinner: number;
         player4Score: number;
+        player4SetWinner: number;
         set_number: number;
-        
-
     }
+
+
+export interface SetScoreForm {
+    playerId: number;
+    player1Score: number;
+    player2Score: number;   
+    setNumber: number;
+    setScore: number;
+    setWinner: number;
+  }
+      
+export interface MatchResultForm {
+    player1Id: number;
+    player2Id: number;
+    matchDate: string;
+    courtId: number;
+    matchWinnerId: number;
+    setScores: SetScoreForm[];
+    setScoresDb: SetScores[];
+}

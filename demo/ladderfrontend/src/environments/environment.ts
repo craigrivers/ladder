@@ -12,5 +12,5 @@
 export const environment = {
   production: false,
   url: '/',
-  apiUrl: 'https://ladder-app-a4ra.onrender.com/ladder/'
+  apiUrl: 'http://localhost:8081/ladder/'
 };

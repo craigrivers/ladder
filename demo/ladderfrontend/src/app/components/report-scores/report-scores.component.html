@@ -1,4 +1,110 @@
-<div>
-    <h2>Report Scores</h2>
-    <p>Still working on recording the scores here. For now, please text your scores to 301-524-0978.</p>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="mb-0">Report Match Scores</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="matchForm" (ngSubmit)="onSubmit()" class="needs-validation">
+        <!-- Player Selection -->
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="player1Id" class="form-label">Player 1: </label>
+
+              <select id="player1Id" formControlName="player1Id" class="form-select">
+                <option *ngIf="currentPlayer" [ngValue]="currentPlayer.playerId">
+                  {{currentPlayer.firstName}} {{currentPlayer.lastName}}
+                </option>
+                <option *ngFor="let player of players" [ngValue]="player.playerId" [disabled]="player.playerId === currentPlayer?.playerId">
+                  {{player.firstName}} {{player.lastName}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="player2Id" class="form-label">Player 2: </label>
+              <select id="player2Id" formControlName="player2Id" class="form-select">
+                <option value="">Select Player 2</option>
+                <option *ngFor="let player of players" [ngValue]="player.playerId">
+                  {{player.firstName}} {{player.lastName}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Match Date -->
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="matchDate" class="form-label">Match Date: </label>
+              <input type="datetime-local" id="matchDate" formControlName="matchDate" class="form-control">
+            </div>
+          </div>
+        </div>
+        <!-- Court Dropdown -->
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="courtId" class="form-label">Court: </label>
+              <select id="courtId" formControlName="courtId" class="form-select">
+                <option value="">Select Court</option>
+                <option *ngFor="let court of courts" [ngValue]="court.courtId">{{ court.name }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Set Scores -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <h4>Set Scores</h4>
+            <div class="table-responsive">
+              <table class="table align-middle text-center border">
+                <thead>
+                  <tr>
+                    <th class="text-start">Player</th>
+                    <th *ngFor="let set of setScoreFormGroups; let i = index">Set {{ i + 1 }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-start">
+                      {{ currentPlayer?.firstName }} {{ currentPlayer?.lastName }}
+                    </td>
+                    <td *ngFor="let set of setScoreFormGroups" [formGroup]="set">
+                      <input type="number" class="form-control" formControlName="player1Score" min="0" max="7">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-start">
+                      {{ player2Name }}
+                    </td>
+                    <td *ngFor="let set of setScoreFormGroups" [formGroup]="set">
+                      <input type="number" class="form-control" formControlName="player2Score" min="0" max="7">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error Messages -->
+        <div *ngIf="error" class="alert alert-danger">
+          {{error}}
+        </div>
+
+        <!-- Submit Button -->
+        <div class="row">
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary" [disabled]="!matchForm.valid">
+              Submit Match Results
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

@@ -45,27 +45,7 @@ export class ReportScoresComponent implements OnInit {
   
   scheduledMatches: Match[] = [];
   myScheduledMatches: Match[] = [];
-  matchScores: MatchScores[] = [];
-  player2: Player | null = null;
-/*
-  newMatch: Match = { 
-    matchId: 0,
-    player1Id: 0,
-    player1Name: '',
-    player2Id: 0,
-    player2Name: '',
-    player3Id: 0, 
-    player3Name: '',
-    player4Id: 0,
-    player4Name: '',
-    matchDate: '',
-    courtName: '',
-    ladderId: 0,
-    matchType: '',
-    courtId: 0,
-    matchScheduledStatus: ''
-  };
-*/  
+  
   matchForm: FormGroup;
   setScores: SetScoreForm[] = [
     { player1Score: 0, player2Score: 0, setNumber: 1 },
@@ -73,13 +53,10 @@ export class ReportScoresComponent implements OnInit {
     { player1Score: 0, player2Score: 0, setNumber: 3 }
   ];
 
- // setScoresDb : SetScores[] = [];
-
   constructor(
     http: HttpService,
     private route: ActivatedRoute,
     private playerService: PlayerService,
-    //private router: Router,
     private fb: FormBuilder
   ) {
     this.http = http;
@@ -88,7 +65,8 @@ export class ReportScoresComponent implements OnInit {
     this.matchForm = this.fb.group({
       player1Id: [this.currentPlayer?.playerId || '', Validators.required],
       player2Id: ['', Validators.required],
-      matchDate: [new Date().toISOString().slice(0, 16), Validators.required],
+      //matchDate: [new Date().toISOString().slice(0, 16), Validators.required],
+      matchDate: [toDatetimeLocalString(new Date()) , Validators.required],
       courtId: [''],
       setScores: this.fb.array(this.setScores.map(set => this.fb.group({
         player1Score: [set.player1Score, [Validators.required, Validators.min(0), Validators.max(7)]],
@@ -105,8 +83,7 @@ export class ReportScoresComponent implements OnInit {
     
     // Initialize newMatch with current player's information
     if (this.currentPlayer) {
- //     this.newMatch.player1Id = this.currentPlayer.playerId;
- //     this.newMatch.player1Name = `${this.currentPlayer.firstName} ${this.currentPlayer.lastName}`;
+ 
     }
 
     // Set default match date to current date + 2 days in EST
@@ -119,9 +96,6 @@ export class ReportScoresComponent implements OnInit {
     const day = String(defaultDate.getDate()).padStart(2, '0');
     const hours = String(defaultDate.getHours()).padStart(2, '0');
     const minutes = String(defaultDate.getMinutes()).padStart(2, '0');
-    
-    // Format as YYYY-MM-DDTHH:mm for datetime-local input
-  //  this.newMatch.matchDate = `${year}-${month}-${day}T${hours}:${minutes}`;
   }
 
   loadCourts(): void {
@@ -179,13 +153,7 @@ export class ReportScoresComponent implements OnInit {
   }
 
   report(): void {
-    /*
-    if (!this.newMatch.player1Id || !this.newMatch.player2Id || !this.newMatch.courtId || !this.newMatch.matchDate) {
-      this.error = 'Please fill in all required fields.';
-      return;
-    }
-      */
-
+ 
     if (!this.currentPlayer) {
       this.error = 'No player is logged in ';
       return;
@@ -195,61 +163,8 @@ export class ReportScoresComponent implements OnInit {
       this.error = 'Players data is not yet loaded. Please try again in a moment.';
       return;
     }
-
-    /*
-    this.newMatch.ladderId = 1; // Assuming ladderId 1 for now
-    this.newMatch.matchType = 'Singles'; // Default to singles for now
-    this.newMatch.matchScheduledStatus = 'scheduled';
-
-    this.player2 = this.players.find(
-      p => Number(p.playerId) === Number(this.newMatch.player2Id)
-    ) || null;
-    if (!this.player2) {
-      this.error = 'Selected player not found. Please try again.';
-      return;
-    }
-    */
   }
   
-  updateMatch(match: Match): void {
-    // Update courtName based on selected courtId
-    const selectedCourt = this.courts.find(court => Number(court.courtId) === Number(match.courtId));
-    if (selectedCourt) {
-      match.courtName = selectedCourt.name;
-    }
-
-    this.http.updateMatch(match).subscribe({
-      next: (response) => {
-        console.log('Match updated successfully:', response);
-      },
-      error: (err) => {
-        this.error = 'Failed to update match. Please try again later.';
-        console.error('Error updating match:', err);
-      }
-    });
-  }
-/*
-  private resetNewMatch(): void {
-    this.newMatch = {
-      matchId: 0,
-      player1Id: this.currentPlayer?.playerId || 0,
-      player1Name: this.currentPlayer?.firstName + ' ' + this.currentPlayer?.lastName || '',
-      player2Id: 0,
-      player2Name: '',
-      player3Id: 0,
-      player3Name: '',
-      player4Id: 0,
-      player4Name: '',
-      matchDate: '',
-      courtName: '',
-      ladderId: 0,
-      matchType: '',
-      courtId: 0,
-      matchScheduledStatus: ''
-    };
-  }
-*/
-
   onSubmit(): void {
     if (this.matchForm.valid) {
       const formValue = this.matchForm.value;
@@ -329,6 +244,4 @@ export class ReportScoresComponent implements OnInit {
     });
     return setScoresDb;
   }
-        
-
 } 

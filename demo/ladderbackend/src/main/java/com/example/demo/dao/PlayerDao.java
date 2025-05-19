@@ -4,9 +4,9 @@ import com.example.demo.model.Standing;
 import java.util.List;  
 
 public interface PlayerDao {
-    Integer save(Player player);
-    void addPlayerToLadder(Integer playerId, Integer ladderId);
-    void updatePlayer(Integer playerId, String availability);
-    List<Player> getPlayersByLadderId(Integer ladderId);
+    Long save(Player player);
+    void addPlayerToLadder(Long playerId, Long ladderId);
+    void updatePlayer(Long playerId, String availability);
+    List<Player> getPlayersByLadderId(Long ladderId);
     Player login(String email, String password);
 }

@@ -114,6 +114,14 @@ services:
   backend:
     environment:
       - CORS_ALLOWED_ORIGINS: https://ladder-app-a4ra.onrender.com,https://ladder-frontend-vj79.onrender.com
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 ---
 spring:
   config:

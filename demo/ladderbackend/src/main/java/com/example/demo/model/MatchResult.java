@@ -27,6 +27,7 @@ public class MatchResult {
     @Column(name = "MATCH_DATE", nullable = false)
     private LocalDateTime matchDate;
 
+    @OneToMany(mappedBy = "matchResultId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SetScore> setScores;
 
     // Default constructor required by JPA

@@ -24,12 +24,7 @@ function noChange(date: string): string {
   selector: 'app-report-scores',
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule],
-  template: `
-    <div>
-      <h2>Report Scores</h2>
-      <p>Score reporting form will be here</p>
-    </div>
-  `,
+  templateUrl: './report-scores.component.html',
   styles: [],
   providers: [HttpService]
 })

@@ -7,9 +7,9 @@ public class Player {
     String cell;
     String email;
     float level;
-    Integer ladderId;
-    Integer playerId;
-    Integer courtId;
+    Long ladderId;
+    Long playerId;
+    Long courtId;
     String availability;
     String password;
     Integer matchesWon;
@@ -66,27 +66,27 @@ public class Player {
         this.level = level;
     }
 
-    public Integer getLadderId(){
+    public Long getLadderId(){
         return ladderId;
     }
 
-    public void setLadderId(Integer ladderId){
+    public void setLadderId(Long ladderId){
         this.ladderId = ladderId;
     }
 
-    public Integer getPlayerId(){
+    public Long getPlayerId(){
         return playerId;
     }
 
-    public void setPlayerId(Integer playerId){
+    public void setPlayerId(Long playerId){
         this.playerId = playerId;
     }
 
-    public Integer getCourtId(){
+    public Long getCourtId(){
         return courtId;
     }
 
-    public void setCourtId(Integer courtId){
+    public void setCourtId(Long courtId){
         this.courtId = courtId;
     }
 

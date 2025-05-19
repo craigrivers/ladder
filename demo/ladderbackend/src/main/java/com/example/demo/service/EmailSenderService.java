@@ -61,7 +61,7 @@ public class EmailSenderService {
 
     private String[] getPlayersEmails(Match match, Player loggedInPlayer) {
         // The logged in player is the one who updated the match.  Find the email address of the other player.
-        Integer otherPlayerId = match.getPlayer1Id() == loggedInPlayer.getPlayerId() ? match.getPlayer2Id() : match.getPlayer1Id();
+        Long otherPlayerId = match.getPlayer1Id() == loggedInPlayer.getPlayerId() ? match.getPlayer2Id() : match.getPlayer1Id();
         Player otherPlayer = playerDao.getPlayerById(otherPlayerId);
         return new String[] {otherPlayer.getEmail(), loggedInPlayer.getEmail()};
     }
@@ -82,20 +82,4 @@ public class EmailSenderService {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd-yy HH:mm"));
     }
 }
-/*
-    public void sendEmail(String to, String subject, String message) {
-        try {
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setFrom(fromEmail);
-            mailMessage.setTo(to);
-            mailMessage.setSubject(subject);
-            mailMessage.setText(message);
 
-            mailSender.send(mailMessage);
-            log.info("Email sent successfully to: {}", to);
-        } catch (Exception e) {
-            log.error("Failed to send email to: {}. Error: {}", to, e.getMessage(), e);
-            throw new RuntimeException("Failed to send email", e);
-        }
-    }
-*/

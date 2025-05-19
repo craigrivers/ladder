@@ -75,13 +75,13 @@ public class LadderApplication {
 	}
 
   @GetMapping("/ladder/standings")
-  public List<Standing> getStandingsByLadderId(@RequestParam Integer ladderId) {
+  public List<Standing> getStandingsByLadderId(@RequestParam Long ladderId) {
     List <Standing> players = playerService.getStandingsByLadderId(ladderId);
     return players;
   }
 
   @GetMapping("/ladder/players")
-  public List<Player> getPlayersByLadderId(@RequestParam Integer ladderId) {
+  public List<Player> getPlayersByLadderId(@RequestParam Long ladderId) {
     List <Player> players = playerService.getPlayersByLadderId(ladderId);
     return players;
   }
@@ -123,7 +123,7 @@ public class LadderApplication {
   }
 
   @GetMapping("/ladder/scheduledMatches")
-  public List<Match> getScheduledMatches(@RequestParam Integer ladderId) {
+  public List<Match> getScheduledMatches(@RequestParam Long ladderId) {
     List <Match> matches = matchService.getScheduledMatches(ladderId);
     return matches;
   }

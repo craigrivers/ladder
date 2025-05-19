@@ -3,18 +3,18 @@ package com.example.demo.model;
 import java.sql.Timestamp;
 
 public class Match {
-    private Integer matchId;
-    private Integer ladderId;
+    private Long matchId;
+    private Long ladderId;
     private String matchType;
-    private Integer player1Id;
-    private Integer player2Id;
-    private Integer courtId;
+    private Long player1Id;
+    private Long player2Id;
+    private Long courtId;
     private Timestamp matchDate;
     private String player1Name;
     private String player2Name;
-    private Integer player3Id;
+    private Long player3Id;
     private String player3Name;
-    private Integer player4Id;
+    private Long player4Id;
     private String player4Name;
     private String matchScheduledStatus;
     private String courtName;
@@ -24,9 +24,9 @@ public class Match {
     }
 
     // Constructor for query results
-    public Match(int matchId, int ladderId, String matchType, int player1Id, String player1Name,
-                int player2Id, String player2Name, int player3Id, String player3Name,
-                int player4Id, String player4Name, String matchDate, String matchScheduledStatus,
+    public Match(long matchId, long ladderId, String matchType, long player1Id, String player1Name,
+                long player2Id, String player2Name, long player3Id, String player3Name,
+                long player4Id, String player4Name, String matchDate, String matchScheduledStatus,
                 String courtName) {
         this.matchId = matchId;
         this.ladderId = ladderId;
@@ -44,19 +44,19 @@ public class Match {
         this.courtName = courtName;
     }
 
-    public Integer getMatchId() {
+    public Long getMatchId() {
         return matchId;
     }
 
-    public void setMatchId(Integer matchId) {
+    public void setMatchId(Long matchId) {
         this.matchId = matchId;
     }
 
-    public Integer getLadderId() {
+    public Long getLadderId() {
         return ladderId;
     }
 
-    public void setLadderId(Integer ladderId) {
+    public void setLadderId(Long ladderId) {
         this.ladderId = ladderId;
     }
 
@@ -68,27 +68,27 @@ public class Match {
         this.matchType = matchType;
     }
 
-    public Integer getPlayer1Id() {
+    public Long getPlayer1Id() {
         return player1Id;
     }
 
-    public void setPlayer1Id(Integer player1Id) {
+    public void setPlayer1Id(Long player1Id) {
         this.player1Id = player1Id;
     }
 
-    public Integer getPlayer2Id() {
+    public Long getPlayer2Id() {
         return player2Id;
     }
 
-    public void setPlayer2Id(Integer player2Id) {
+    public void setPlayer2Id(Long player2Id) {
         this.player2Id = player2Id;
     }
 
-    public Integer getCourtId() {
+    public Long getCourtId() {
         return courtId;
     }
 
-    public void setCourtId(Integer courtId) {
+    public void setCourtId(Long courtId) {
         this.courtId = courtId;
     }
 
@@ -116,11 +116,11 @@ public class Match {
         this.player2Name = player2Name;
     }
 
-    public Integer getPlayer3Id() {
+    public Long getPlayer3Id() {
         return player3Id;
     }
 
-    public void setPlayer3Id(Integer player3Id) {
+    public void setPlayer3Id(Long player3Id) {
         this.player3Id = player3Id;
     }
 
@@ -132,11 +132,11 @@ public class Match {
         this.player3Name = player3Name;
     }
 
-    public Integer getPlayer4Id() {
+    public Long getPlayer4Id() {
         return player4Id;
     }
 
-    public void setPlayer4Id(Integer player4Id) {
+    public void setPlayer4Id(Long player4Id) {
         this.player4Id = player4Id;
     }
 

@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpUrlEncodingCodec } from '@angu
 import { environment } from '../environments/environment';
 import { Observable, tap } from 'rxjs';
 import { catchError, throwError } from 'rxjs';
-import { Player, Court, Match } from './ladderObjects';
+import { Player, Court, Match, Standing} from './ladderObjects';
 
 @Injectable()
 export class HttpService {
@@ -42,21 +42,6 @@ export class HttpService {
       `${this.apiUrl}register`,
       player,
       { 
-        headers: this.getHeaders(),
-        withCredentials: true
-      }
-    ).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  getStandings(ladderId: number): Observable<Player[]> {
-    const params = new HttpParams().set('ladderId', ladderId.toString());
-    
-    return this.http.get<Player[]>(
-      `${this.apiUrl}standings`,
-      { 
-        params,
         headers: this.getHeaders(),
         withCredentials: true
       }
@@ -198,6 +183,33 @@ export class HttpService {
       headers: this.getHeaders(),
       withCredentials: true
     }).pipe(  
+      catchError(this.handleError)
+    );
+  }
+
+  saveMatchResult(matchResult: any): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}saveMatchResult`,
+      matchResult,
+      { 
+        headers: this.getHeaders(),
+        withCredentials: true
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getStandings(ladderId: number): Observable<Standing[]> {
+    const params = new HttpParams().set('ladderId', ladderId.toString());
+    return this.http.get<Standing[]>(
+      `${this.apiUrl}standings`,
+      { 
+        params,
+        headers: this.getHeaders(),
+        withCredentials: true
+      }
+    ).pipe(
       catchError(this.handleError)
     );
   }

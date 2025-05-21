@@ -9,29 +9,29 @@
     {{ error }}
   </div>
 
-  <table *ngIf="!isLoading && !error && standings.length > 0" class="standings-table">
+  <table *ngIf="!isLoading && !error && standing.length > 0" class="standings-table">
     <thead>
       <tr>
         <th>Rank</th>
         <th>Name</th>
         <th>Matches Won</th>
-        <th>Matches Lost</th>
+        <th>Sets Won</th>
         <th>Games Won</th>
        
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let standing of standings; let i = index">
+      <tr *ngFor="let standing of standing; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ standing.firstName + ' ' + standing.lastName }}</td>
         <td>{{ standing.matchesWon }}</td>
-        <td>{{ standing.matchesLost }}</td>
+        <td>{{ standing.setsWon }}</td>
         <td>{{ standing.gamesWon }}</td>
       </tr>
     </tbody>
   </table>
 
-  <div *ngIf="!isLoading && !error && standings.length === 0" class="no-data">
+  <div *ngIf="!isLoading && !error && standing.length === 0" class="no-data">
     No standings data available.
   </div>
 </div>

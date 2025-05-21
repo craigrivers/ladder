@@ -9,7 +9,7 @@ public class Standing {
     private Integer matchesWon;
     private Integer matchesLost;  
     private Integer gamesWon;
-    private Integer gamesLost;
+    private Integer setsWon;
       
     public Long getLadderId() {
         return ladderId;
@@ -75,11 +75,11 @@ public class Standing {
         this.gamesWon = gamesWon;
     }
 
-    public Integer getGamesLost() {
-        return gamesLost;
+    public Integer getSetsWon() {
+        return setsWon;
     }
 
-    public void setGamesLost(Integer gamesLost) {
-        this.gamesLost = gamesLost;
+    public void setSetsWon(Integer setsWon) {
+        this.setsWon = setsWon;
     }
 }

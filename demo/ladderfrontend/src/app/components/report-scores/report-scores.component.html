@@ -71,7 +71,7 @@
                 <tbody>
                   <tr>
                     <td class="text-start">
-                      {{ currentPlayer?.firstName }} {{ currentPlayer?.lastName }}
+                      {{ player1Name }}
                     </td>
                     <td *ngFor="let set of setScoreFormGroups" [formGroup]="set">
                       <input type="number" class="form-control" formControlName="player1Score" min="0" max="7">

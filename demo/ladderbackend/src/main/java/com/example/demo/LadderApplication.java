@@ -18,6 +18,7 @@ import com.example.demo.model.Court;
 import com.example.demo.service.PlayerService;
 import com.example.demo.service.MatchService;
 import com.example.demo.model.Match;
+import com.example.demo.model.MatchResult;
 import com.example.demo.dto.LoginRequest;
 import com.example.demo.dto.NotificationRequest;
 import com.example.demo.dto.ErrorResponse;
@@ -27,6 +28,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import com.example.demo.dto.EmailRequest;
 import com.example.demo.service.EmailSenderService;
+import com.example.demo.service.MatchResultService;
 
 @SpringBootApplication
 @RestController
@@ -41,12 +43,17 @@ public class LadderApplication {
     @Autowired
     private EmailSenderService emailSenderService;
 
+    @Autowired
+    private MatchResultService matchResultService;
+
     private static final Logger log = LoggerFactory.getLogger(LadderApplication.class);
 
-    public LadderApplication(PlayerService playerService, MatchService matchService, EmailSenderService emailSenderService) {
+    public LadderApplication(PlayerService playerService, MatchService matchService,
+     EmailSenderService emailSenderService, MatchResultService matchResultService) {
         this.playerService = playerService;
         this.matchService = matchService;
         this.emailSenderService = emailSenderService;
+        this.matchResultService = matchResultService;
     }
 
     public static void main(String[] args) {
@@ -73,12 +80,13 @@ public class LadderApplication {
 		response.put("message", "Player registered successfully");
 		return ResponseEntity.ok(response);
 	}
-
+/**
   @GetMapping("/ladder/standings")
   public List<Standing> getStandingsByLadderId(@RequestParam Long ladderId) {
     List <Standing> players = playerService.getStandingsByLadderId(ladderId);
     return players;
   }
+*/
 
   @GetMapping("/ladder/players")
   public List<Player> getPlayersByLadderId(@RequestParam Long ladderId) {
@@ -179,5 +187,27 @@ public class LadderApplication {
       response.put("message", "Error updating match: " + e.getMessage());
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
+  }
+
+  @PostMapping("/ladder/saveMatchResult")
+  public ResponseEntity<Map<String, String>> saveMatchResult(@RequestBody MatchResult matchResult) {
+    log.info("Saving match result: {}", matchResult);
+    try {
+      matchResultService.save(matchResult);
+      emailSenderService.sendMatchResult(matchResult);
+      Map<String, String> response = new HashMap<>();
+      response.put("message", "Match result saved successfully");
+      return ResponseEntity.ok(response);
+    } catch (Exception e) {
+      log.error("Error saving match result: {}", e.getMessage(), e);
+      Map<String, String> response = new HashMap<>();
+      response.put("message", "Error saving match result: " + e.getMessage());
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+  }
+  @GetMapping("/ladder/standings")
+  public List<Standing> getStandings(@RequestParam Long ladderId) {
+    List <Standing> standings = matchResultService.getStanding(ladderId);
+    return standings;
   }
 }

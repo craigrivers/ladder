@@ -4,7 +4,7 @@ import { RouterModule, Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { Match, MatchScores, SetScores, Player, Court } from '../../ladderObjects';
+import { Match, SetScores, Player, Court } from '../../ladderObjects';
 import { HttpService } from '../../app.http.service';
 import { PlayerService } from '../../services/player.service';
 
@@ -57,7 +57,8 @@ export class ReportScoresComponent implements OnInit {
     http: HttpService,
     private route: ActivatedRoute,
     private playerService: PlayerService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.http = http;
     this.currentPlayer = this.playerService.player;
@@ -65,7 +66,6 @@ export class ReportScoresComponent implements OnInit {
     this.matchForm = this.fb.group({
       player1Id: [this.currentPlayer?.playerId || '', Validators.required],
       player2Id: ['', Validators.required],
-      //matchDate: [new Date().toISOString().slice(0, 16), Validators.required],
       matchDate: [toDatetimeLocalString(new Date()) , Validators.required],
       courtId: [''],
       setScores: this.fb.array(this.setScores.map(set => this.fb.group({
@@ -174,24 +174,40 @@ export class ReportScoresComponent implements OnInit {
 
       // Create MatchResult object
       const matchResult = {
+        matchId: 0,
+        matchResultId: 0,
         player1Id: formValue.player1Id,
         player2Id: formValue.player2Id,
         matchDate: new Date(formValue.matchDate),
         matchWinnerId: this.determineMatchWinner(formValue.setScores),
-        setScoresDb: this.transferSetScoresToDb(formValue.setScores, formValue),
+        //setScores: this.transferSetScoresToDb(formValue.setScores, formValue)
+        setScores: setScoresDb
+         /*
+        ,
         setScores: formValue.setScores.map((set: SetScoreForm, index: number) => {
           const setWinner = set.player1Score > set.player2Score ? 1 : 2;
           return {
-          //  playerId: setWinner === 1 ? formValue.player1Id : formValue.player2Id,
             player1Score: set.player1Score,
             player2Score: set.player2Score, 
             setNumber: index + 1
           };
         })
+        */
+
       };
 
-      // TODO: Implement API call to save match result
-      console.log('Match Result:', matchResult);
+      // Call the service to save the match result
+      this.http.saveMatchResult(matchResult).subscribe({
+        next: (response) => {
+          console.log('Match result saved successfully:', response);
+          this.router.navigate(['/standing']);
+          // Handle success (e.g., show success message, reset form, etc.)
+        },
+        error: (error) => {
+          console.error('Error saving match result:', error);
+          this.error = 'Failed to save match result. Please try again.';
+        }
+      });
     }
   }
 
@@ -217,6 +233,12 @@ export class ReportScoresComponent implements OnInit {
     return player ? `${player.firstName} ${player.lastName}` : '';
   }
 
+  get player1Name(): string {
+    const player1Id = this.matchForm.get('player1Id')?.value;
+    const player = this.players.find(p => p.playerId === player1Id);
+    return player ? `${player.firstName} ${player.lastName}` : '';
+  }
+
   get setScoreFormGroups(): FormGroup[] {
     return (this.setScoresArray.controls as FormGroup[]);
   }
@@ -229,19 +251,21 @@ export class ReportScoresComponent implements OnInit {
     setScores.map((set: SetScoreForm, index: number) => {
       const setWinner = set.player1Score > set.player2Score ? 1 : 2;
       setScoresDb.push({ 
+        matchResultId: formValue.matchResultId,
         playerId: formValue.player1Id,
-        score: set.player1Score,
-        set_number: index + 1,
+        setScore: set.player1Score,
+        setNumber: index + 1,
         setWinner: set.player1Score > set.player2Score ? 1 : 0,    
         matchId: formValue.matchId}, 
         {
+        matchResultId: formValue.matchResultId, 
         playerId: formValue.player2Id,
-        score: set.player2Score,
-        set_number: index + 1,
+        setScore: set.player2Score,
+        setNumber: index + 1,
         setWinner: set.player2Score > set.player1Score ? 1 : 0,
         matchId: formValue.matchId
         });
     });
     return setScoresDb;
   }
-} 
+}  

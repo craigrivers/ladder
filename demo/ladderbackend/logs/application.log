@@ -1,9 +1,9 @@
-2025-05-14 15:45:06 [main] INFO  c.example.demo.DemoApplicationTests - Starting DemoApplicationTests using Java 21.0.6 with PID 93310 (started by craigrivers in /Users/craigrivers/Development/Projects/ladder/demo/ladderbackend)
-2025-05-14 15:45:06 [main] INFO  c.example.demo.DemoApplicationTests - No active profile set, falling back to 1 default profile: "default"
-2025-05-14 15:45:08 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-05-14 15:45:08 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21 ms. Found 0 JPA repository interfaces.
-2025-05-14 15:45:09 [main] INFO  com.zaxxer.hikari.HikariDataSource - LadderHikariPool - Starting...
-2025-05-14 15:45:10 [main] ERROR com.zaxxer.hikari.pool.HikariPool - LadderHikariPool - Exception during pool initialization.
+2025-05-19 22:50:51 [main] INFO  c.example.demo.DemoApplicationTests - Starting DemoApplicationTests using Java 21.0.6 with PID 17070 (started by craigrivers in /Users/craigrivers/Development/Projects/ladder/demo/ladderbackend)
+2025-05-19 22:50:51 [main] INFO  c.example.demo.DemoApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-05-19 22:50:53 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-19 22:50:53 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 48 ms. Found 0 JPA repository interfaces.
+2025-05-19 22:50:54 [main] INFO  com.zaxxer.hikari.HikariDataSource - LadderHikariPool - Starting...
+2025-05-19 22:50:55 [main] ERROR com.zaxxer.hikari.pool.HikariPool - LadderHikariPool - Exception during pool initialization.
 org.postgresql.util.PSQLException: The connection attempt failed.
 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:354)
 	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
@@ -135,8 +135,8 @@ Caused by: java.net.UnknownHostException: host.docker.internal
 	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:132)
 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:258)
 	... 120 common frames omitted
-2025-05-14 15:45:10 [main] INFO  com.zaxxer.hikari.HikariDataSource - LadderHikariPool - Starting...
-2025-05-14 15:45:11 [main] ERROR com.zaxxer.hikari.pool.HikariPool - LadderHikariPool - Exception during pool initialization.
+2025-05-19 22:50:55 [main] INFO  com.zaxxer.hikari.HikariDataSource - LadderHikariPool - Starting...
+2025-05-19 22:50:56 [main] ERROR com.zaxxer.hikari.pool.HikariPool - LadderHikariPool - Exception during pool initialization.
 org.postgresql.util.PSQLException: The connection attempt failed.
 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:354)
 	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
@@ -273,12 +273,12 @@ Caused by: java.net.UnknownHostException: host.docker.internal
 	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:132)
 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:258)
 	... 125 common frames omitted
-2025-05-14 15:45:11 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-05-14 15:45:12 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-2025-05-14 15:45:12 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-05-14 15:45:12 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-05-14 15:45:12 [main] INFO  com.zaxxer.hikari.HikariDataSource - LadderHikariPool - Starting...
-2025-05-14 15:45:13 [main] ERROR com.zaxxer.hikari.pool.HikariPool - LadderHikariPool - Exception during pool initialization.
+2025-05-19 22:50:56 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-19 22:50:57 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-05-19 22:50:57 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-05-19 22:50:57 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-19 22:50:57 [main] INFO  com.zaxxer.hikari.HikariDataSource - LadderHikariPool - Starting...
+2025-05-19 22:50:58 [main] ERROR com.zaxxer.hikari.pool.HikariPool - LadderHikariPool - Exception during pool initialization.
 org.postgresql.util.PSQLException: The connection attempt failed.
 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:354)
 	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
@@ -418,7 +418,7 @@ Caused by: java.net.UnknownHostException: host.docker.internal
 	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:132)
 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:258)
 	... 128 common frames omitted
-2025-05-14 15:45:13 [main] WARN  o.h.e.j.e.i.JdbcEnvironmentInitiator - HHH000342: Could not obtain connection to query metadata
+2025-05-19 22:50:58 [main] WARN  o.h.e.j.e.i.JdbcEnvironmentInitiator - HHH000342: Could not obtain connection to query metadata
 java.lang.NullPointerException: Cannot invoke "org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(java.sql.SQLException, String)" because the return value of "org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.sqlExceptionHelper()" is null
 	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:116)
 	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:276)
@@ -535,12 +535,12 @@ java.lang.NullPointerException: Cannot invoke "org.hibernate.engine.jdbc.spi.Sql
 	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-2025-05-14 15:45:13 [main] ERROR o.s.o.j.LocalContainerEntityManagerFactoryBean - Failed to initialize JPA EntityManagerFactory: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
-2025-05-14 15:45:13 [main] WARN  o.s.w.c.s.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
-2025-05-14 15:45:13 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+2025-05-19 22:50:58 [main] ERROR o.s.o.j.LocalContainerEntityManagerFactoryBean - Failed to initialize JPA EntityManagerFactory: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
+2025-05-19 22:50:58 [main] WARN  o.s.w.c.s.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
+2025-05-19 22:50:58 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2025-05-14 15:45:13 [main] ERROR o.s.boot.SpringApplication - Application run failed
+2025-05-19 22:50:58 [main] ERROR o.s.boot.SpringApplication - Application run failed
 org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1786)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
@@ -665,8 +665,8 @@ Caused by: org.hibernate.HibernateException: Unable to determine Dialect without
 	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
 	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
 	... 109 common frames omitted
-2025-05-14 15:45:13 [main] WARN  o.s.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener] to prepare test instance [com.example.demo.DemoApplicationTests@be6d228]
-java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@1a17dd6f testClass = com.example.demo.DemoApplicationTests, locations = [], classes = [com.example.demo.LadderApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = ["org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true"], contextCustomizers = [org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5b38c1ec, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1807e3f6, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@30f842ca, org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@5c7bfdc1, org.springframework.boot.test.context.SpringBootTestAnnotation@b63b660a], resourceBasePath = "src/main/webapp", contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
+2025-05-19 22:50:58 [main] WARN  o.s.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener] to prepare test instance [com.example.demo.DemoApplicationTests@5a35ae82]
+java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@51dbed72 testClass = com.example.demo.DemoApplicationTests, locations = [], classes = [com.example.demo.LadderApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = ["org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true"], contextCustomizers = [org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@761e788f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@5ef6fd7f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@4a734c04, org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@65b97f47, org.springframework.boot.test.context.SpringBootTestAnnotation@d6c835], resourceBasePath = "src/main/webapp", contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:180)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:130)
 	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:191)
@@ -793,3 +793,71 @@ Caused by: org.hibernate.HibernateException: Unable to determine Dialect without
 	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
 	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
 	... 109 common frames omitted
+2025-05-19 22:52:52 [main] INFO  c.example.demo.DemoApplicationTests - Starting DemoApplicationTests using Java 21.0.6 with PID 17535 (started by craigrivers in /Users/craigrivers/Development/Projects/ladder/demo/ladderbackend)
+2025-05-19 22:52:52 [main] INFO  c.example.demo.DemoApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-05-19 22:52:55 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-19 22:52:55 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 55 ms. Found 0 JPA repository interfaces.
+2025-05-19 22:52:57 [main] INFO  com.zaxxer.hikari.HikariDataSource - LadderHikariPool - Starting...
+2025-05-19 22:52:57 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LadderHikariPool - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2025-05-19 22:52:57 [main] INFO  com.zaxxer.hikari.HikariDataSource - LadderHikariPool - Start completed.
+2025-05-19 22:52:58 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-19 22:52:58 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-05-19 22:52:58 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-05-19 22:52:58 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-19 22:52:58 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-19 22:53:01 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-19 22:53:01 [main] DEBUG org.hibernate.SQL - drop table if exists match_result cascade 
+2025-05-19 22:53:01 [main] DEBUG org.hibernate.SQL - drop table if exists set_score cascade 
+2025-05-19 22:53:01 [main] DEBUG org.hibernate.SQL - create table match_result (match_date timestamp(6) not null, match_id bigint, match_result_id bigint generated by default as identity, match_winner_id bigint not null, player1_id bigint not null, player2_id bigint not null, primary key (match_result_id))
+2025-05-19 22:53:01 [main] DEBUG org.hibernate.SQL - create table set_score (set_number integer not null, set_score integer not null, set_winner integer not null, match_result_id bigint not null, player_id bigint not null, set_score_id bigint generated by default as identity, primary key (set_score_id))
+2025-05-19 22:53:01 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-19 22:53:02 [main] INFO  com.example.demo.config.CorsConfig - Initializing CORS filter with allowed origins: http://localhost,http://localhost:80,http://localhost:4200,https://ladder-app-a4ra.onrender.com,https://ladder-frontend-vj79.onrender.com,http://localhost:8081,https://localhost:8081,https://dmvtennisladders.com
+2025-05-19 22:53:02 [main] INFO  com.example.demo.config.CorsConfig - CORS filter initialized with configuration: org.springframework.web.cors.CorsConfiguration@3437fc4f
+2025-05-19 22:53:02 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-19 22:53:02 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 2b4d204c-7876-40ce-aca2-d71516b10b64
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-05-19 22:53:02 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@15b882a0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6ade4ac6, org.springframework.security.web.context.SecurityContextHolderFilter@318ca53a, org.springframework.security.web.header.HeaderWriterFilter@7f588bc6, org.springframework.web.filter.CorsFilter@2f403d0a, org.springframework.security.web.authentication.logout.LogoutFilter@1c294a17, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@72f91c91, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@69d6fe75, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@fcae085, org.springframework.security.web.access.ExceptionTranslationFilter@4bfaff23, org.springframework.security.web.access.intercept.AuthorizationFilter@7843b65e]
+2025-05-19 22:53:04 [main] INFO  c.example.demo.DemoApplicationTests - Started DemoApplicationTests in 13.567 seconds (process running for 21.865)
+2025-05-19 22:53:04 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-19 22:53:04 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - drop table if exists match_result cascade 
+2025-05-19 22:53:04 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - drop table if exists set_score cascade 
+2025-05-19 22:53:04 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - LadderHikariPool - Shutdown initiated...
+2025-05-19 22:53:04 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - LadderHikariPool - Shutdown completed.
+2025-05-19 23:53:29 [main] INFO  c.example.demo.DemoApplicationTests - Starting DemoApplicationTests using Java 21.0.6 with PID 25211 (started by craigrivers in /Users/craigrivers/Development/Projects/ladder/demo/ladderbackend)
+2025-05-19 23:53:29 [main] INFO  c.example.demo.DemoApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-05-19 23:53:31 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-19 23:53:31 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 32 ms. Found 0 JPA repository interfaces.
+2025-05-19 23:53:32 [main] INFO  com.zaxxer.hikari.HikariDataSource - LadderHikariPool - Starting...
+2025-05-19 23:53:32 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LadderHikariPool - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2025-05-19 23:53:32 [main] INFO  com.zaxxer.hikari.HikariDataSource - LadderHikariPool - Start completed.
+2025-05-19 23:53:32 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-19 23:53:32 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-05-19 23:53:32 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-05-19 23:53:33 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-19 23:53:33 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-19 23:53:34 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-19 23:53:34 [main] DEBUG org.hibernate.SQL - drop table if exists match_result cascade 
+2025-05-19 23:53:34 [main] DEBUG org.hibernate.SQL - drop table if exists set_score cascade 
+2025-05-19 23:53:34 [main] DEBUG org.hibernate.SQL - create table match_result (match_date timestamp(6) not null, match_id bigint, match_result_id bigint generated by default as identity, match_winner_id bigint not null, player1_id bigint not null, player2_id bigint not null, primary key (match_result_id))
+2025-05-19 23:53:34 [main] DEBUG org.hibernate.SQL - create table set_score (set_number integer not null, set_score integer not null, set_winner integer not null, match_result_id bigint not null, player_id bigint not null, set_score_id bigint generated by default as identity, primary key (set_score_id))
+2025-05-19 23:53:34 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-19 23:53:34 [main] INFO  com.example.demo.config.CorsConfig - Initializing CORS filter with allowed origins: http://localhost,http://localhost:80,http://localhost:4200,https://ladder-app-a4ra.onrender.com,https://ladder-frontend-vj79.onrender.com,http://localhost:8081,https://localhost:8081,https://dmvtennisladders.com
+2025-05-19 23:53:34 [main] INFO  com.example.demo.config.CorsConfig - CORS filter initialized with configuration: org.springframework.web.cors.CorsConfiguration@1bd5b1c8
+2025-05-19 23:53:34 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-19 23:53:35 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: ee437caf-46d9-458d-af44-1b46f07be337
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-05-19 23:53:35 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4407f129, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@731bdcca, org.springframework.security.web.context.SecurityContextHolderFilter@11efa76e, org.springframework.security.web.header.HeaderWriterFilter@3f13720f, org.springframework.web.filter.CorsFilter@3e242137, org.springframework.security.web.authentication.logout.LogoutFilter@7212d3df, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1899c7ae, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5cdf2c83, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@76fdd5f1, org.springframework.security.web.access.ExceptionTranslationFilter@5834fd3f, org.springframework.security.web.access.intercept.AuthorizationFilter@1142843c]
+2025-05-19 23:53:36 [main] INFO  c.example.demo.DemoApplicationTests - Started DemoApplicationTests in 6.847 seconds (process running for 11.9)
+2025-05-19 23:53:36 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-19 23:53:36 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - drop table if exists match_result cascade 
+2025-05-19 23:53:36 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - drop table if exists set_score cascade 
+2025-05-19 23:53:36 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - LadderHikariPool - Shutdown initiated...
+2025-05-19 23:53:36 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - LadderHikariPool - Shutdown completed.

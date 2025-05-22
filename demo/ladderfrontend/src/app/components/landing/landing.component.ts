@@ -6,11 +6,12 @@ import { PlayerService } from '../../services/player.service';
 import { HttpService } from '../../app.http.service';
 import { Player } from '../../ladderObjects';
 import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, MatIconModule],
   providers: [HttpService],
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss']
@@ -20,12 +21,17 @@ export class LandingComponent {
   readonly password = signal<string>('');
   errorMessage = signal<string | null>(null);
   isLoading = signal<boolean>(false);
+  hidePassword = signal<boolean>(true);
 
   constructor(
     private router: Router,
     private playerService: PlayerService,
     private httpService: HttpService
   ) {}
+
+  togglePasswordVisibility(): void {
+    this.hidePassword.update(value => !value);
+  }
 
   onLogin(): void {
     this.isLoading.set(true);

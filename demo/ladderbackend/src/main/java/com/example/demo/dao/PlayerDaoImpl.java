@@ -121,7 +121,6 @@
 			}, ladderId);
 		}
 		public Player login(String email, String password){
-			System.out.println("Login query: " + LOGIN_QUERY + " email: " + email + " password: " + password);
 			try {
 				return jdbcTemplate.queryForObject(LOGIN_QUERY, (rs, rowNum) -> {
 					return getPlayer(rs);

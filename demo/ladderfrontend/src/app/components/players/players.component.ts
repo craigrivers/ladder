@@ -135,6 +135,17 @@ export class PlayersComponent implements OnInit {
           match.matchDate = toDatetimeLocalString(match.matchDate);
           return match;
         });
+        // filter out matches that were scheduled to happen in the past or have already happened
+        this.scheduledMatches = this.scheduledMatches.filter(match => {
+          const matchDate = new Date(match.matchDate);
+          return matchDate > new Date();
+        });
+        // Order the scheduled matches by matchDate
+        this.scheduledMatches.sort((a, b) => {
+          const dateA = new Date(a.matchDate);
+          const dateB = new Date(b.matchDate);
+          return dateA.getTime() - dateB.getTime();
+        });
         this.loadMyScheduledMatches();
       },
       error: (err) => {

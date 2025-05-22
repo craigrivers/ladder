@@ -69,7 +69,7 @@
   <div *ngIf="!isLoading && !error && players.length === 0" class="no-data">
     No players available.
   </div>
-  <div *ngIf="page === 'players'">
+  <div *ngIf="page === 'players'" class="scheduled-matches-section">
   <h3>My Scheduled Matches</h3>
   <!-- Display the matches that the current player is scheduled to play in -->
   <div id="myScheduledMatches" *ngIf="myScheduledMatches.length > 0">
@@ -116,7 +116,7 @@
       </div>
     </div>
   </div>
-
+<div *ngIf="page === 'players'" class="scheduled-matches-section mt-4">
   <h3>Scheduled Matches</h3>
   <table *ngIf="scheduledMatches.length > 0" class="matches-table">
     <thead>
@@ -135,9 +135,10 @@
   <div *ngIf="scheduledMatches.length === 0" class="no-data">
     No scheduled matches available.
   </div>
+</div>
 
-  <h3>Schedule a Match</h3>
-  
+  <h3 class="schedule-match-header">Schedule a Match</h3>
+
   <div class="container">
     
     <!-- Match Scheduling Form -->

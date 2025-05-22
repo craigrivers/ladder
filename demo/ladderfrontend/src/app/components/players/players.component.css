@@ -318,3 +318,12 @@ button:disabled {
     margin-bottom: 0;
   }
 }
+
+.scheduled-matches-section {
+  margin-top: 2rem;
+}
+
+.schedule-match-header {
+  margin-top: 2rem !important;
+}
+

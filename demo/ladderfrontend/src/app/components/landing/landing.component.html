@@ -25,15 +25,25 @@
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            [ngModel]="password()"
-            (ngModelChange)="password.set($event)"
-            name="password"
-            required
-            placeholder="Enter your password"
-          />
+          <div class="password-input-container">
+            <input
+              [type]="hidePassword() ? 'password' : 'text'"
+              id="password"
+              [ngModel]="password()"
+              (ngModelChange)="password.set($event)"
+              name="password"
+              required
+              placeholder="Enter your password"
+            />
+            <button 
+              type="button" 
+              class="password-toggle" 
+              (click)="togglePasswordVisibility()"
+              [attr.aria-label]="hidePassword() ? 'Show password' : 'Hide password'"
+            >
+              <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </div>
         </div>
         <div *ngIf="errorMessage()" class="error-message">
           {{ errorMessage() }}

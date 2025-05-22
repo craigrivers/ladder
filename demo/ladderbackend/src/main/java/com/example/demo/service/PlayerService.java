@@ -46,7 +46,6 @@ public class PlayerService {
     }   
 
     public Player login(String email, String password){
-        System.out.println("PlayerService: Login request received for email: " + email);
         return this.playerDao.login(email, password);
     }
 }

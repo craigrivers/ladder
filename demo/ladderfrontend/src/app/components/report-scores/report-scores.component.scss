@@ -1,0 +1,35 @@
+// Uniform vertical spacing for report scores component
+
+.row,
+.form-group,
+h2,
+h4,
+.table-responsive,
+.alert,
+button {
+  margin-bottom: 2rem;
+}
+
+.card-header {
+  margin-bottom: 1.5rem;
+}
+
+.table {
+  margin-bottom: 2rem;
+  
+  // Add horizontal spacing between set score inputs
+  td {
+    padding: 0.75rem 1.5rem;
+    
+    input.form-control {
+      width: 80px;
+      margin: 0 auto;
+    }
+  }
+}
+
+// Remove bottom margin from last child in form
+form > .row:last-child,
+form > .row.mb-4:last-child {
+  margin-bottom: 0;
+} 

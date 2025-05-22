@@ -20,12 +20,12 @@ import org.springframework.beans.factory.annotation.Autowired;
     }
 
     @Override
-    public List<Match> getScheduledMatches(Integer ladderId) {
+    public List<Match> getScheduledMatches(Long ladderId) {
         return matchDao.getScheduledMatches(ladderId);
     }
 
     @Override       
-    public Integer addMatch(Match match) {
+    public Long addMatch(Match match) {
         return matchDao.addMatch(match);
     }
 

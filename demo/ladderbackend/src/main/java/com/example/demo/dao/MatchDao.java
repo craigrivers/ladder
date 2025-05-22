@@ -5,8 +5,8 @@ import com.example.demo.model.Match;
 
 public interface MatchDao {
 
-    List<Match> getScheduledMatches(Integer ladderId);
-    Integer addMatch(Match match);
+    List<Match> getScheduledMatches(Long ladderId);
+    Long addMatch(Match match);
     void updateMatch(Match match);  
 
 }

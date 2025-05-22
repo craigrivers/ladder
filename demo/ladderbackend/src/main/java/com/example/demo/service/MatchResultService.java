@@ -1,10 +1,12 @@
 package com.example.demo.service;
 
 import com.example.demo.model.MatchResult;
-import java.util.List;  
+import com.example.demo.model.Standing;
+import java.util.List;
 
 public interface MatchResultService {
-    public void save(MatchResult matchResult);
-    public List<MatchResult> findAll();
+    void save(MatchResult matchResult);
+    List<MatchResult> findAll();
+    List<Standing> getStanding(Long ladderId);
 }
 

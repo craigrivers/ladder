@@ -16,22 +16,22 @@ import { PlayerService } from '../../services/player.service';
       </div>
       <ul [class.active]="isMenuOpen()">
         <li>
-          <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+          <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">Home</a>
         </li>
         <li *ngIf="!isLoggedIn()">
-          <a routerLink="/register" routerLinkActive="active">Register</a>
+          <a routerLink="/register" routerLinkActive="active" (click)="closeMenu()">Register</a>
         </li> 
         <li *ngIf="isLoggedIn()">
-          <a routerLink="/players" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Schedule Matches</a>
+          <a routerLink="/players" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">Schedule Matches</a>
         </li>
         <li *ngIf="isLoggedIn()">
-          <a routerLink="/update-availability" routerLinkActive="active">Update Availability</a>
+          <a routerLink="/update-availability" routerLinkActive="active" (click)="closeMenu()">Update Availability</a>
         </li>
         <li *ngIf="isLoggedIn()">
-          <a routerLink="/report-scores" routerLinkActive="active">Report Scores</a>
+          <a routerLink="/report-scores" routerLinkActive="active" (click)="closeMenu()">Report Scores</a>
         </li>
         <li *ngIf="isLoggedIn()">
-          <a routerLink="/standing" routerLinkActive="active">Standings</a>
+          <a routerLink="/standing" routerLinkActive="active" (click)="closeMenu()">Standings</a>
         </li>
       </ul>
     </nav>
@@ -150,5 +150,9 @@ export class NavigationComponent {
 
   toggleMenu(): void {
     this.isMenuOpen.update(value => !value);
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen.set(false);
   }
 } 

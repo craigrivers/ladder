@@ -27,7 +27,7 @@ public class SetScoreDaoImpl implements SetScoreDao {
     public void save(SetScore setScore){
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(INSERT_INTO_SET_SCORE, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = connection.prepareStatement(INSERT_INTO_SET_SCORE, new String[]{"set_score_id"});
             ps.setLong(1, setScore.getMatchResultId());
             ps.setLong(2, setScore.getPlayerId());
             ps.setInt(3, setScore.getSetNumber());

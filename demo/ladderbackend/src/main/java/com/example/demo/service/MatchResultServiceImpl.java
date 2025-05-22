@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.MatchResult;
+import com.example.demo.model.Standing;
 import com.example.demo.model.SetScore;
 import com.example.demo.dao.MatchResultDao;
 import com.example.demo.dao.SetScoreDao;
@@ -39,5 +40,10 @@ public class MatchResultServiceImpl implements MatchResultService {
             matchResult.setSetScores(setScoreDao.findByMatchResultId(matchResult.getMatchResultId()));
         }
         return matchResults;
+    }
+
+    @Override
+    public List<Standing> getStanding(Long ladderId) {
+        return matchResultDao.getStanding(ladderId);
     }
 }

@@ -13,8 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   providers: [HttpService]
 })
 export class StandingComponent implements OnInit {
-  standings: Standing[] = [];
-
+  standing: Standing[] = [];
   isLoading = true;
   error: string | null = null;
   http: HttpService;
@@ -33,8 +32,9 @@ export class StandingComponent implements OnInit {
     // Using ladderId 1 as an example - you might want to make this dynamic
     this.http.getStandings(1).subscribe({
       next: (data) => {
-        this.standings = data;
+        this.standing = data;
         this.isLoading = false;
+        console.log(this.standing);
       },
       error: (err) => {
         this.error = 'Failed to load standings. Please try again later.';

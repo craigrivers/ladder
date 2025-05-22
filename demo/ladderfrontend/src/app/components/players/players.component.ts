@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Match, MatchScores, Player, Court } from '../../ladderObjects';
+import { Match,  Player, Court } from '../../ladderObjects';
 import { HttpService } from '../../app.http.service';
 import { PlayerService } from '../../services/player.service';
 
@@ -52,7 +52,6 @@ export class PlayersComponent implements OnInit {
   
   scheduledMatches: Match[] = [];
   myScheduledMatches: Match[] = [];
-  matchScores: MatchScores[] = [];
   updatedAvailability: string = '';
   player2: Player | null = null;
 

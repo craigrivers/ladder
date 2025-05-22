@@ -29,13 +29,13 @@ public class PlayerService {
     }
 
     public void save(Player player){
-        Integer playerId = this.playerDao.save(player);
+        Long playerId = this.playerDao.save(player);
         this.playerDao.addPlayerToLadder(playerId, player.getLadderId());
     }
-    public List<Player> getPlayersByLadderId(Integer ladderId){           
+    public List<Player> getPlayersByLadderId(Long ladderId){           
         return this.playerDao.getPlayersByLadderId(ladderId);
     }   
-    public List<Standing> getStandingsByLadderId(Integer ladderId){
+    public List<Standing> getStandingsByLadderId(Long ladderId){
         return this.scoreDao.getStandingsByLadderId(ladderId);
     }
     public List<Court> getCourts(){

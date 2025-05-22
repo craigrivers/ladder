@@ -19,17 +19,6 @@ export interface Player {
     courtName: string;
 }
 
-export interface Standing {
-    firstName: string;
-    lastName: string;
-    goesBy: string;
-    matchesWon: number;
-    matchesLost: number;
-    gamesWon: number;
-    gamesLost: number;
-    ladderId:number;
-}
-
 export interface Ladder {
     ladderId:number;
     name:string;
@@ -60,17 +49,59 @@ export interface Match {
     matchScheduledStatus: string;
     courtName: string; }
 
+    export interface SetScores {
+        matchId: number;
+        matchResultId: number;
+        playerId: number;
+        setScore: number;
+        setNumber: number;
+        setWinner: number; // 0 = loser, 1 = winner
+    }
+/*
     export interface MatchScores {
+        matchResultId: number;
         matchId: number;
         player1Id: number;
         player2Id: number;
         player3Id: number;      
         player4Id: number;
         player1Score: number;
+        player1SetWinner: number;       // 0 = loser, 1 = winner
         player2Score: number;
+        player2SetWinner: number;
         player3Score: number;
+        player3SetWinner: number;
         player4Score: number;
+        player4SetWinner: number;
         set_number: number;
-        
-
     }
+*/
+/*
+export interface SetScoreForm {
+    playerId: number;
+    player1Score: number;
+    player2Score: number;   
+    setNumber: number;
+    setScore: number;
+    setWinner: number;
+  }
+*/
+
+export interface MatchResultForm {
+    matchResultId: number;
+    matchId: number;    
+    player1Id: number;
+    player2Id: number;
+    matchDate: string;
+    courtId: number;
+    matchWinnerId: number;
+    setScores: SetScores[];
+}
+export interface Standing {
+    playerId: number;
+    firstName: string;
+    lastName: string;   
+    matchesWon: number;
+    setsWon: number;
+    gamesWon: number;
+} 

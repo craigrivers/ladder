@@ -25,18 +25,17 @@ public class ScoreDaoImpl implements ScoreDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override
-    public List<Standing> getStandingsByLadderId(Integer ladderId) {
+    public List<Standing> getStandingsByLadderId(Long ladderId) {
         return jdbcTemplate.query(GET_STANDINGS_BY_LADDER, (rs, rowNum) -> {
             Standing standing = new Standing();
-            standing.setPlayerId(rs.getInt("PLAYER_ID"));
-            standing.setLadderId(rs.getInt("LADDER_ID"));
+            standing.setPlayerId(rs.getLong("PLAYER_ID"));
+            standing.setLadderId(rs.getLong("LADDER_ID"));
             standing.setFirstName(rs.getString("FIRST_NAME"));
             standing.setLastName(rs.getString("LAST_NAME"));
             standing.setMatchesWon(rs.getInt("MATCHES_WON"));
-            standing.setMatchesLost(rs.getInt("MATCHES_LOST"));
             standing.setGamesWon(rs.getInt("GAMES_WON"));
-            standing.setGamesLost(rs.getInt("GAMES_LOST"));
+            standing.setSetsWon(rs.getInt("SETS_WON"));
+        //  standing.setMatchesLost(rs.getInt("MATCHES_LOST"));
             return standing;
         }, ladderId);
     }

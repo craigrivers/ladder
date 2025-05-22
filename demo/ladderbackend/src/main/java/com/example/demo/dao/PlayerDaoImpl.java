@@ -59,12 +59,12 @@
 		PlayerDaoImpl(JdbcTemplate jdbcTemplate){
 			this.jdbcTemplate = jdbcTemplate;
 		}
-		public Player getPlayerById(Integer playerId) {
+		public Player getPlayerById(Long playerId) {
 			return jdbcTemplate.queryForObject(GET_PLAYER_BY_ID_QUERY, (rs, rowNum) -> {
 				return getPlayer(rs);
 			}, playerId);
 		}	
-		public Integer save(Player player) {
+		public Long save(Player player) {
 			KeyHolder keyHolder = new GeneratedKeyHolder();
 			
 			jdbcTemplate.update(connection -> {
@@ -75,12 +75,12 @@
 				ps.setString(4, player.getCell());
 				ps.setString(5, player.getEmail());
 				ps.setFloat(6, player.getLevel());
-				ps.setInt(7, player.getCourtId());
+				ps.setLong(7, player.getCourtId());
 				ps.setString(8, player.getAvailability());
 				return ps;
 			}, keyHolder);
 			
-			return keyHolder.getKey().intValue();
+			return keyHolder.getKey().longValue();
 		}
 
 		/**
@@ -88,7 +88,7 @@
 		 * @param playerId The ID of the player to add to the ladder
 		 * @param ladderId The ID of the ladder to add the player to
 		 */
-		public void addPlayerToLadder(Integer playerId, Integer ladderId) {
+		public void addPlayerToLadder(Long playerId, Long ladderId) {
 			this.jdbcTemplate.update(INSERT_INTO_PLAYER_LADDER, ladderId, playerId);
 		}
 
@@ -97,18 +97,18 @@
 		 * @param playerId The ID of the player to update
 		 * @param availability
 		 */
-		public void updatePlayer(Integer playerId, String availability) {
+		public void updatePlayer(Long playerId, String availability) {
 			logger.info("Updating player availability - playerId: {}, availability: {}", playerId, availability);
 			this.jdbcTemplate.update(UPDATE_PLAYER, availability, playerId);
 			logger.info("Successfully updated player availability for playerId: {}", playerId);
 		}
 
 		@Override
-		public List<Player> getPlayersByLadderId(Integer ladderId) {
+		public List<Player> getPlayersByLadderId(Long ladderId) {
 			return jdbcTemplate.query(GET_PLAYERS_BY_LADDER_QUERY, (rs, rowNum) -> {
 				Player player = new Player();
-				player.setPlayerId(rs.getInt("PLAYER_ID"));
-				player.setLadderId(rs.getInt("LADDER_ID"));
+				player.setPlayerId(rs.getLong("PLAYER_ID"));
+				player.setLadderId(rs.getLong("LADDER_ID"));
 				player.setPassword(rs.getString("PASSWORD"));
 				player.setFirstName(rs.getString("FIRST_NAME"));
 				player.setLastName(rs.getString("LAST_NAME"));
@@ -116,7 +116,7 @@
 				player.setEmail(rs.getString("EMAIL"));
 				player.setAvailability(rs.getString("AVAILABILITY"));
 				player.setCourtName(rs.getString("COURT_NAME"));
-				player.setCourtId(rs.getInt("COURT_ID"));
+				player.setCourtId(rs.getLong("COURT_ID"));
 				return player;
 			}, ladderId);
 		}
@@ -132,8 +132,8 @@
 		}
 		private Player getPlayer(ResultSet rs) throws SQLException{
 			Player player = new Player();
-				player.setPlayerId(rs.getInt("PLAYER_ID"));
-				player.setLadderId(rs.getInt("LADDER_ID"));
+				player.setPlayerId(rs.getLong("PLAYER_ID"));
+				player.setLadderId(rs.getLong("LADDER_ID"));
 				player.setPassword(rs.getString("PASSWORD"));
 				player.setFirstName(rs.getString("FIRST_NAME"));
 				player.setLastName(rs.getString("LAST_NAME"));
@@ -141,7 +141,7 @@
 				player.setEmail(rs.getString("EMAIL"));
 				player.setAvailability(rs.getString("AVAILABILITY"));
 				player.setCourtName(rs.getString("COURT_NAME"));
-				player.setCourtId(rs.getInt("COURT_ID"));
+				player.setCourtId(rs.getLong("COURT_ID"));
 				return player;
 		}	
 	}

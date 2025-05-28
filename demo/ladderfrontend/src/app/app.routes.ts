@@ -5,6 +5,7 @@ import { ReportScoresComponent } from './components/report-scores/report-scores.
 import { PlayersComponent } from './components/players/players.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { HomeComponent } from './components/home/home.component';
+import { MatchResultsComponent } from './components/match-results/match-results.component';
 
 export const routes: Routes = [
   { 
@@ -24,6 +25,7 @@ export const routes: Routes = [
   },
   { path: 'register', component: RegisterComponent },
   { path: 'report-scores', component: ReportScoresComponent },
+  { path: 'match-results', component: MatchResultsComponent },
   { path: 'home', component: HomeComponent },
   { path: '', component: LandingComponent }
 ];

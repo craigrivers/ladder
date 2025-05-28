@@ -20,6 +20,12 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
+    "@types/datatables.net": "^1.12.3",
+    "@types/jquery": "^3.5.32",
+    "angular-datatables": "^19.0.0",
+    "datatables.net": "^2.3.1",
+    "datatables.net-dt": "^2.3.1",
+    "jquery": "^3.7.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

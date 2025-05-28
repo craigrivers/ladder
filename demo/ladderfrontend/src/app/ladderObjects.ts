@@ -57,35 +57,6 @@ export interface Match {
         setNumber: number;
         setWinner: number; // 0 = loser, 1 = winner
     }
-/*
-    export interface MatchScores {
-        matchResultId: number;
-        matchId: number;
-        player1Id: number;
-        player2Id: number;
-        player3Id: number;      
-        player4Id: number;
-        player1Score: number;
-        player1SetWinner: number;       // 0 = loser, 1 = winner
-        player2Score: number;
-        player2SetWinner: number;
-        player3Score: number;
-        player3SetWinner: number;
-        player4Score: number;
-        player4SetWinner: number;
-        set_number: number;
-    }
-*/
-/*
-export interface SetScoreForm {
-    playerId: number;
-    player1Score: number;
-    player2Score: number;   
-    setNumber: number;
-    setScore: number;
-    setWinner: number;
-  }
-*/
 
 export interface MatchResultForm {
     matchResultId: number;
@@ -105,3 +76,10 @@ export interface Standing {
     setsWon: number;
     gamesWon: number;
 } 
+export interface MatchResult {
+    players: string; // First and last names of the players
+    matchDate: string;
+    courtName: string;
+    matchWinner: string;
+    matchScore: string;
+}

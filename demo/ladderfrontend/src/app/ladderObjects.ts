@@ -62,10 +62,13 @@ export interface MatchResultForm {
     matchResultId: number;
     matchId: number;    
     player1Id: number;
+    player1Name: string;
     player2Id: number;
+    player2Name: string;    
     matchDate: string;
     courtId: number;
     matchWinnerId: number;
+    winnerName: string;
     setScores: SetScores[];
 }
 export interface Standing {

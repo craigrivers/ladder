@@ -77,12 +77,12 @@ class MatchResultServiceImplTest {
     void findAll_ShouldReturnAllMatchResultsWithSetScores() {
         // Arrange
         List<MatchResult> expectedMatchResults = Arrays.asList(matchResult);
-        when(matchResultDao.findAll()).thenReturn(expectedMatchResults);
+        when(matchResultDao.getMatchResults(1L)).thenReturn(expectedMatchResults);
         when(setScoreDao.findByMatchResultId(anyLong()))
             .thenReturn(Arrays.asList(setScore1, setScore2));
 
         // Act
-        List<MatchResult> actualMatchResults = matchResultService.findAll();
+        List<MatchResult> actualMatchResults = matchResultService.getMatchResults(1L);
 
         // Assert
         assertNotNull(actualMatchResults);
@@ -92,22 +92,22 @@ class MatchResultServiceImplTest {
         assertNotNull(result.getSetScores());
         assertEquals(2, result.getSetScores().size());
         
-        verify(matchResultDao, times(1)).findAll();
+        verify(matchResultDao, times(1)).getMatchResults(1L);
         verify(setScoreDao, times(1)).findByMatchResultId(matchResult.getMatchResultId());
     }
 
     @Test
-    void findAll_ShouldHandleEmptyResults() {
+    void getMatchResults_ShouldHandleEmptyResults() {
         // Arrange
-        when(matchResultDao.findAll()).thenReturn(List.of());
+        when(matchResultDao.getMatchResults(1L)).thenReturn(List.of());
 
         // Act
-        List<MatchResult> actualMatchResults = matchResultService.findAll();
+        List<MatchResult> actualMatchResults = matchResultService.getMatchResults(1L);
 
         // Assert
         assertNotNull(actualMatchResults);
         assertTrue(actualMatchResults.isEmpty());
-        verify(matchResultDao, times(1)).findAll();
+        verify(matchResultDao, times(1)).getMatchResults(1L);
         verify(setScoreDao, never()).findByMatchResultId(anyLong());
     }
 } 

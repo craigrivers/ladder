@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MatchResultService {
     void save(MatchResult matchResult);
-    List<MatchResult> findAll();
+    List<MatchResult> getMatchResults(Long ladderId);
     List<Standing> getStanding(Long ladderId);
 }
 

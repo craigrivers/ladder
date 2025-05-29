@@ -6,7 +6,7 @@ import com.example.demo.model.Standing;
 
 public interface MatchResultDao {
     void save(MatchResult matchResult);
-    List<MatchResult> findAll();
+    List<MatchResult> getMatchResults(Long ladderId);
     List<Standing> getStanding(Long ladderId);
 
 }

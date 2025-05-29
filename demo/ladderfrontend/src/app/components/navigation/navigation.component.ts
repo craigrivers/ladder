@@ -33,6 +33,9 @@ import { PlayerService } from '../../services/player.service';
         <li *ngIf="isLoggedIn()">
           <a routerLink="/standing" routerLinkActive="active" (click)="closeMenu()">Standings</a>
         </li>
+        <li *ngIf="isLoggedIn()">
+          <a routerLink="/match-results" routerLinkActive="active" (click)="closeMenu()">Match Results</a>
+        </li>
       </ul>
     </nav>
   `,

@@ -210,4 +210,12 @@ public class LadderApplication {
     List <Standing> standings = matchResultService.getStanding(ladderId);
     return standings;
   }
+
+  @GetMapping("/ladder/matchResults")
+  public List<MatchResult> getMatchResults(@RequestParam Long ladderId) {
+    log.info("Getting match results for ladderId: {}", ladderId);
+    List <MatchResult> matchResults = matchResultService.getMatchResults(ladderId);
+    log.info("Match results: {}" + matchResults + " Scores = " + matchResults.get(0).getSetScores().get(0).getSetScore());
+    return matchResults;
+  }
 }

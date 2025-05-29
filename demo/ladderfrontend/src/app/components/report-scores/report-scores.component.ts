@@ -176,24 +176,12 @@ export class ReportScoresComponent implements OnInit {
       const matchResult = {
         matchId: 0,
         matchResultId: 0,
+        ladderId: 1,
         player1Id: formValue.player1Id,
         player2Id: formValue.player2Id,
         matchDate: new Date(formValue.matchDate),
         matchWinnerId: this.determineMatchWinner(formValue.setScores),
-        //setScores: this.transferSetScoresToDb(formValue.setScores, formValue)
         setScores: setScoresDb
-         /*
-        ,
-        setScores: formValue.setScores.map((set: SetScoreForm, index: number) => {
-          const setWinner = set.player1Score > set.player2Score ? 1 : 2;
-          return {
-            player1Score: set.player1Score,
-            player2Score: set.player2Score, 
-            setNumber: index + 1
-          };
-        })
-        */
-
       };
 
       // Call the service to save the match result

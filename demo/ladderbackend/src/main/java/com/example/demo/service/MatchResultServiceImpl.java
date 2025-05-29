@@ -34,8 +34,8 @@ public class MatchResultServiceImpl implements MatchResultService {
     }
 
     @Override
-    public List<MatchResult> findAll() {
-        List<MatchResult> matchResults =  matchResultDao.findAll();
+    public List<MatchResult> getMatchResults(Long ladderId) {
+        List<MatchResult> matchResults =  matchResultDao.getMatchResults(ladderId);
         for (MatchResult matchResult : matchResults) {
             matchResult.setSetScores(setScoreDao.findByMatchResultId(matchResult.getMatchResultId()));
         }

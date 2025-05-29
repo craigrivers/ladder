@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpUrlEncodingCodec } from '@angu
 import { environment } from '../environments/environment';
 import { Observable, tap } from 'rxjs';
 import { catchError, throwError } from 'rxjs';
-import { Player, Court, Match, Standing} from './ladderObjects';
+import { Player, Court, Match, Standing, MatchResult, MatchResultForm} from './ladderObjects';
 
 @Injectable()
 export class HttpService {
@@ -204,6 +204,20 @@ export class HttpService {
     const params = new HttpParams().set('ladderId', ladderId.toString());
     return this.http.get<Standing[]>(
       `${this.apiUrl}standings`,
+      { 
+        params,
+        headers: this.getHeaders(),
+        withCredentials: true
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getMatchResults(ladderId: number): Observable<MatchResultForm[]> {
+    const params = new HttpParams().set('ladderId', ladderId.toString());
+    return this.http.get<MatchResultForm[]>(
+      `${this.apiUrl}matchResults`,
       { 
         params,
         headers: this.getHeaders(),

@@ -63,15 +63,19 @@ class MatchResultDaoImplTest {
     }
 
     @Test
-    void findAll_ShouldReturnListOfMatchResults() throws SQLException {
+    void getMatchResults_ShouldReturnListOfMatchResults() throws SQLException {
         // Arrange
         LocalDateTime now = LocalDateTime.now();
-        MatchResult expectedResult = new MatchResult(1L, 1L, 101L, 102L, 101L, now);
+        MatchResult expectedResult = new MatchResult(1L, 1L, 101L, 102L, 101L, now, 1L, "Player 1", "Player 2", "Player 1");
         
-        when(jdbcTemplate.query(anyString(), any(RowMapper.class))).thenReturn(List.of(expectedResult));
+        when(jdbcTemplate.query(
+            eq("SELECT * FROM MATCH_RESULT WHERE LADDER_ID = ?"),
+            any(RowMapper.class),
+            eq(1L)
+        )).thenReturn(List.of(expectedResult));
 
         // Act
-        List<MatchResult> results = matchResultDao.findAll();
+        List<MatchResult> results = matchResultDao.getMatchResults(1L);
 
         // Assert
         assertNotNull(results);
@@ -85,6 +89,10 @@ class MatchResultDaoImplTest {
         assertEquals(101, result.getMatchWinnerId());
         assertEquals(now, result.getMatchDate());
         
-        verify(jdbcTemplate).query(anyString(), any(RowMapper.class));
+        verify(jdbcTemplate).query(
+            eq("SELECT * FROM MATCH_RESULT WHERE LADDER_ID = ?"),
+            any(RowMapper.class),
+            eq(1L)
+        );
     }
 } 

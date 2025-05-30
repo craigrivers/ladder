@@ -67,6 +67,7 @@ export interface MatchResultForm {
     player2Name: string;    
     matchDate: string;
     courtId: number;
+    courtName: string;
     matchWinnerId: number;
     winnerName: string;
     setScores: SetScores[];

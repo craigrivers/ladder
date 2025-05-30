@@ -23,7 +23,7 @@ public class MatchResultDaoImpl implements MatchResultDao {
     private static final Logger logger = LoggerFactory.getLogger(MatchResultDaoImpl.class);
     private final JdbcTemplate jdbcTemplate;
 
-    private static final String INSERT_INTO_MATCH_RESULT = "INSERT INTO MATCH_RESULT (MATCH_ID, PLAYER1_ID, PLAYER2_ID, MATCH_WINNER_ID, MATCH_DATE, LADDER_ID) VALUES (?, ?, ?, ?, ?,?)";
+    private static final String INSERT_INTO_MATCH_RESULT = "INSERT INTO MATCH_RESULT (MATCH_ID, PLAYER1_ID, PLAYER2_ID, MATCH_WINNER_ID, MATCH_DATE, LADDER_ID, COURT_ID) VALUES (?, ?, ?, ?, ?,?,?)";
     private static final String SELECT_STANDING = """
                 with match_winner as (
                 select p.player_id, p.first_name, p.last_name, count(m.match_winner_id) as matches_won
@@ -44,11 +44,12 @@ public class MatchResultDaoImpl implements MatchResultDao {
     private static final String SELECT_MATCH_RESULTS = """
  select mr.match_result_id, mr.match_id, mr.player1_id, mr.player2_id, mr.match_winner_id, 
             mr.match_date, p.first_name || ' ' ||p.last_name as player1_name, p2.first_name || ' ' || p2.last_name as player2_name,
-			p3.first_name || ' ' || p3.last_name as winner_name, mr.ladder_id
+			p3.first_name || ' ' || p3.last_name as winner_name, mr.ladder_id, mr.court_id, c.name as court_name
             from match_result mr
             join player p on mr.player1_id = p.player_id
             join player p2 on mr.player2_id = p2.player_id
 			join player p3 on mr.match_winner_id = p3.player_id
+            left join court c on mr.court_id = c.court_id
             where mr.ladder_id = ?
             order by match_date desc;""";
 
@@ -68,6 +69,7 @@ public class MatchResultDaoImpl implements MatchResultDao {
             ps.setLong(4, matchResult.getMatchWinnerId());
             ps.setTimestamp(5, Timestamp.valueOf(matchResult.getMatchDate()));
             ps.setLong(6, matchResult.getLadderId());
+            ps.setLong(7, matchResult.getCourtId());
             return ps;
         }, keyHolder);
         matchResult.setMatchResultId(keyHolder.getKey().longValue());
@@ -84,9 +86,11 @@ public class MatchResultDaoImpl implements MatchResultDao {
                 rs.getLong("MATCH_WINNER_ID"),
                 rs.getTimestamp("MATCH_DATE").toLocalDateTime(),
                 rs.getLong("LADDER_ID"),
+                rs.getLong("COURT_ID"),
                 rs.getString("PLAYER1_NAME"),
                 rs.getString("PLAYER2_NAME"),
-                rs.getString("WINNER_NAME")
+                rs.getString("WINNER_NAME"),
+                rs.getString("COURT_NAME")
             );
         }, ladderId);
     }

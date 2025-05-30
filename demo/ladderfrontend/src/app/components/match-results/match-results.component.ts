@@ -81,7 +81,7 @@ export class MatchResultsComponent implements OnInit, AfterViewInit, OnDestroy {
     return {
       players: players,
       matchDate: matchResultForm.matchDate,
-      courtName: 'Court 1',
+      courtName: matchResultForm.courtName,
       matchWinner: matchResultForm.winnerName,
       matchScore: matchScore
     };

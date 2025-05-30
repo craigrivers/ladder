@@ -66,7 +66,7 @@ class MatchResultDaoImplTest {
     void getMatchResults_ShouldReturnListOfMatchResults() throws SQLException {
         // Arrange
         LocalDateTime now = LocalDateTime.now();
-        MatchResult expectedResult = new MatchResult(1L, 1L, 101L, 102L, 101L, now, 1L, "Player 1", "Player 2", "Player 1");
+        MatchResult expectedResult = new MatchResult(1L, 1L, 101L, 102L, 101L, now, 1L, 1L, "Player 1", "Player 2", "Player 1", "Court 1");
         
         when(jdbcTemplate.query(
             eq("SELECT * FROM MATCH_RESULT WHERE LADDER_ID = ?"),

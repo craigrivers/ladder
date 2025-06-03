@@ -41,7 +41,12 @@ public class MatchResult {
     @NotNull
     @Column(name = "LADDER_ID", nullable = false)
     private Long ladderId;
+    // This is the court id where the match was played
+    @Column(name = "COURT_ID")
+    private Long courtId;
 
+    // This is the court name where the match was played
+    private String courtName;
     private String player1Name;
     private String player2Name;
     private String winnerName;
@@ -65,10 +70,11 @@ public class MatchResult {
      * @param player1Name The full name of the first player
      * @param player2Name The full name of the second player
      * @param winnerName The full name of the match winner
+     * @param courtName The name of the court where the match was played
      */
     public MatchResult(Long matchResultId, Long matchId, Long player1Id, Long player2Id, 
-                      Long matchWinnerId, LocalDateTime matchDate, Long ladderId, String player1Name, 
-                      String player2Name, String winnerName) {
+                      Long matchWinnerId, LocalDateTime matchDate, Long ladderId, Long courtId, String player1Name, 
+                      String player2Name, String winnerName, String courtName) {
         this.matchResultId = matchResultId;
         this.matchId = matchId;
         this.player1Id = player1Id;
@@ -76,9 +82,11 @@ public class MatchResult {
         this.matchWinnerId = matchWinnerId;
         this.matchDate = matchDate;
         this.ladderId = ladderId;
+        this.courtId = courtId;
         this.player1Name = player1Name;
         this.player2Name = player2Name;
         this.winnerName = winnerName;
+        this.courtName = courtName;
     }
 
     // Getters
@@ -110,6 +118,10 @@ public class MatchResult {
         return ladderId;
     }
 
+    public Long getCourtId() {
+        return courtId;
+    }
+
     public String getPlayer1Name() {
         return player1Name;
     }
@@ -124,6 +136,10 @@ public class MatchResult {
 
     public List<SetScore> getSetScores() {
         return setScores;
+    }
+
+    public String getCourtName() {
+        return courtName;
     }
 
     // Setters
@@ -155,6 +171,10 @@ public class MatchResult {
         this.ladderId = ladderId;
     }
 
+    public void setCourtId(Long courtId) {
+        this.courtId = courtId;
+    }
+
     public void setPlayer1Name(String player1Name) {
         this.player1Name = player1Name;
     }
@@ -170,6 +190,10 @@ public class MatchResult {
     public void setSetScores(List<SetScore> setScores) {
         this.setScores = setScores;
     }
+
+    public void setCourtName(String courtName) {
+        this.courtName = courtName;
+    }
     
     @Override
     public String toString() {
@@ -181,9 +205,11 @@ public class MatchResult {
                 ", matchWinnerId=" + matchWinnerId +
                 ", matchDate=" + matchDate +
                 ", ladderId=" + ladderId +
+                ", courtId=" + courtId +
                 ", player1Name='" + player1Name + '\'' +
                 ", player2Name='" + player2Name + '\'' +
                 ", winnerName='" + winnerName + '\'' +
+                ", courtName='" + courtName + '\'' +
                 '}';
     }
 }

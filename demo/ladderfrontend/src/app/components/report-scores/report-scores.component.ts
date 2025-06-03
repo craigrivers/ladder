@@ -181,7 +181,8 @@ export class ReportScoresComponent implements OnInit {
         player2Id: formValue.player2Id,
         matchDate: new Date(formValue.matchDate),
         matchWinnerId: this.determineMatchWinner(formValue.setScores),
-        setScores: setScoresDb
+        setScores: setScoresDb,
+        courtId: formValue.courtId
       };
 
       // Call the service to save the match result

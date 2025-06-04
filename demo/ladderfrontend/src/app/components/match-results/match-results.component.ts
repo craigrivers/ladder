@@ -36,6 +36,9 @@ export class MatchResultsComponent implements OnInit, AfterViewInit, OnDestroy {
       processing: true,
       responsive: true,
       order: [[1, 'desc']],
+      columnDefs: [
+        { targets: 3, orderable: false } // Disable sorting for the Score column (index 3)
+      ],
       language: {
         search: 'Search:',
         lengthMenu: 'Show _MENU_ entries',
@@ -58,6 +61,9 @@ export class MatchResultsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.httpService.getMatchResults(this.ladderId).subscribe((matchResults: MatchResultForm[]) => {
       this.matchResults = matchResults.map(matchResult => this.getMatchResult(matchResult));
       // Only trigger DataTable after data is set
+      // TODO: This is a hack to get the table to render. It should be done in a better way.  
+      //Sort the match results by matchDate in descending order
+      this.matchResults.sort((a, b) => new Date(b.matchDate).getTime() - new Date(a.matchDate).getTime());
       this.dtTrigger.next(null);
     });
   }
@@ -78,9 +84,11 @@ export class MatchResultsComponent implements OnInit, AfterViewInit, OnDestroy {
   getMatchResult(matchResultForm: MatchResultForm): MatchResult {
     let matchScore = this.getFormattedScores(matchResultForm);
     let players = this.getPlayers(matchResultForm); 
+    // Ensure matchDate is in ISO format
+    const isoDate = new Date(matchResultForm.matchDate).toISOString().split('T')[0];
     return {
       players: players,
-      matchDate: matchResultForm.matchDate,
+      matchDate: isoDate, // Use ISO format for sorting
       courtName: matchResultForm.courtName,
       matchWinner: matchResultForm.winnerName,
       matchScore: matchScore

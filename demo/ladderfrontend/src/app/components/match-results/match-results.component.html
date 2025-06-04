@@ -14,7 +14,9 @@
     <tbody>
       <tr *ngFor="let result of matchResults">
         <td>{{ result.players }}</td>
-        <td>{{ result.matchDate | date:'mediumDate' }}</td>
+        <td [attr.data-order]="result.matchDate">
+          {{ result.matchDate | date:'mediumDate' }}
+        </td>
         <td>{{ result.matchWinner }}</td>
         <td>{{ result.matchScore }}</td>
         <td class="hide-on-mobile">{{ result.courtName }}</td>

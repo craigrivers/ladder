@@ -100,6 +100,9 @@ import { PlayerService } from '../../services/player.service';
       padding: 0.5rem 1rem;
       border-radius: 4px;
       transition: background-color 0.3s ease;
+      display: inline-block;
+      white-space: normal;
+      width: auto;
     }
 
     .navigation a:hover {
@@ -140,6 +143,8 @@ import { PlayerService } from '../../services/player.service';
       .navigation a {
         display: block;
         padding: 0.75rem;
+        width: 100%;
+        box-sizing: border-box;
       }
     }
   `]

@@ -3,35 +3,48 @@
   <p>
     Remember the email address and password you enter below and use it to login to this site.  The cell number is used to contact you for matches.
   </p>
-  <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="firstName">First Name:</label>
-      <input 
-        type="text" 
-        id="firstName"
-        name="firstName"
-        [(ngModel)]="player.firstName"
-        required>
+      <div class="input-container">
+        <input 
+          type="text" 
+          id="firstName"
+          formControlName="firstName"
+          required>
+        <div class="validation-messages" *ngIf="registerForm.get('firstName')?.touched">
+          <div *ngIf="registerForm.get('firstName')?.errors?.['required']" class="validation-error">First name is required</div>
+        </div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="lastName">Last Name:</label>
-      <input 
-        type="text" 
-        id="lastName"
-        name="lastName"
-        [(ngModel)]="player.lastName"
-        required>
+      <div class="input-container">
+        <input 
+          type="text" 
+          id="lastName"
+          formControlName="lastName"
+          required>
+        <div class="validation-messages" *ngIf="registerForm.get('lastName')?.touched">
+          <div *ngIf="registerForm.get('lastName')?.errors?.['required']" class="validation-error">Last name is required</div>
+        </div>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="email">Email:</label>
-      <input 
-        type="email" 
-        id="email"
-        name="email"
-        [(ngModel)]="player.email"
-        required>
+      <div class="input-container">
+        <input 
+          type="email" 
+          id="email"
+          formControlName="email"
+          required>
+        <div class="validation-messages" *ngIf="registerForm.get('email')?.touched">
+          <div *ngIf="registerForm.get('email')?.errors?.['required']" class="validation-error">Email is required</div>
+          <div *ngIf="registerForm.get('email')?.errors?.['email']" class="validation-error">Please enter a valid email address</div>
+        </div>
+      </div>
     </div>
 
     <div class="form-group">
@@ -40,16 +53,12 @@
         <input 
           type="password" 
           id="password"
-          name="password"
-          [(ngModel)]="player.password"
-          required
-          minlength="8"
-          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{8,}$"
-          #password="ngModel">
-        <div class="validation-messages" *ngIf="password.touched">
-          <div *ngIf="password.errors?.['required']" class="validation-error">Password is required</div>
-          <div *ngIf="password.errors?.['minlength']" class="validation-error">Password must be at least 8 characters long</div>
-          <div *ngIf="password.errors?.['pattern']" class="validation-error">
+          formControlName="password"
+          required>
+        <div class="validation-messages" *ngIf="registerForm.get('password')?.touched">
+          <div *ngIf="registerForm.get('password')?.errors?.['required']" class="validation-error">Password is required</div>
+          <div *ngIf="registerForm.get('password')?.errors?.['minlength']" class="validation-error">Password must be at least 8 characters long</div>
+          <div *ngIf="registerForm.get('password')?.errors?.['pattern']" class="validation-error">
             Password must contain:
             <ul>
               <li>At least one uppercase letter</li>
@@ -63,59 +72,56 @@
     </div>
 
     <div class="form-group">
-      <label for="cell">cell:</label>
-      <input 
-        type="tel" 
-        id="cell"
-        name="cell"
-        [(ngModel)]="player.cell">
-    </div>
-<!----
-    <div class="form-group">
-      <label for="level">Skill Level:</label>
-      <input 
-        type="number" 
-        id="level"
-        name="level"
-        [(ngModel)]="player.level"
-        min="3.5"
-        max="4.5"
-        step="0.1"
-        #level="ngModel">
-      <div *ngIf="level.invalid && (level.dirty || level.touched)" class="validation-error">
-        <div *ngIf="level.errors?.['min'] || level.errors?.['max']">Skill level must be between 3.5 and 4.5</div>
+      <label for="cell">Cell:</label>
+      <div class="input-container">
+        <input 
+          type="tel" 
+          id="cell"
+          formControlName="cell">
       </div>
     </div>
-  --->
+
+    <div class="form-group--checkbox">
+      <label for="receiveText">Receive match updates by text:</label>
+      <input 
+        type="checkbox" 
+        id="receiveText" 
+        formControlName="receiveText">
+    </div>
+    <div class="form-group">
+      <p>By checking the box above, you agree to receive match results and match requests by text.  Message and data rates may apply. Message frequency varies. You can opt out at any time.</p>
+    </div>
+
     <div class="form-group">
       <label for="court">Preferred Court:</label>
-      <select 
-        id="court"
-        name="court"
-        [(ngModel)]="player.courtId"
-        required
-        #court="ngModel">
-        <option value="">Select a court</option>
-        <option *ngFor="let court of courts" [value]="court.courtId">
-          {{ court.name }}
-        </option>
-      </select>
-      <div *ngIf="court.invalid && (court.dirty || court.touched)" class="validation-error">
-        <div *ngIf="court.errors?.['required']">Preferred court is required</div>
+      <div class="input-container">
+        <select 
+          id="court"
+          formControlName="courtId"
+          required>
+          <option value="">Select a court</option>
+          <option *ngFor="let court of courts" [value]="court.courtId">
+            {{ court.name }}
+          </option>
+        </select>
+        <div class="validation-messages" *ngIf="registerForm.get('courtId')?.touched">
+          <div *ngIf="registerForm.get('courtId')?.errors?.['required']" class="validation-error">Preferred court is required</div>
+        </div>
       </div>
     </div>
 
     <div class="form-group">
       <label for="availability">Availability:</label>
-      <textarea 
-        id="availability"
-        name="availability"
-        [(ngModel)]="player.availability"
-        maxlength="255"
-        placeholder="Available most days starting 8AM. Not available most Tuesdays and Sundays."
-        rows="4"
-        class="availability-textarea">
-      </textarea>
+      <div class="input-container">
+        <textarea 
+          id="availability"
+          formControlName="availability"
+          maxlength="255"
+          placeholder="Available most days starting 8AM. Not available most Tuesdays and Sundays."
+          rows="4"
+          class="availability-textarea">
+        </textarea>
+      </div>
     </div>
 
     <div *ngIf="isLoading" class="loading">
@@ -126,6 +132,6 @@
       {{ error }}
     </div>
 
-    <button type="submit" [disabled]="!registerForm.form.valid || !player.courtId">Register</button>
+    <button type="submit" [disabled]="!registerForm.valid || isLoading">Register</button>
   </form>
 </div>

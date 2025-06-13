@@ -17,6 +17,7 @@ export interface Player {
     goesBy: string;
     phone: string;
     courtName: string;
+    receiveText: boolean;
 }
 
 export interface Ladder {

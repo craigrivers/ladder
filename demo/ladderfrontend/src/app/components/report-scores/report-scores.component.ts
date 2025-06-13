@@ -167,6 +167,8 @@ export class ReportScoresComponent implements OnInit {
   
   onSubmit(): void {
     if (this.matchForm.valid) {
+      //Disable the submit button
+      this.matchForm.disable();
       const formValue = this.matchForm.value;
 
       const setScoresDb = this.transferSetScoresToDb(formValue.setScores, formValue);
@@ -195,6 +197,10 @@ export class ReportScoresComponent implements OnInit {
         error: (error) => {
           console.error('Error saving match result:', error);
           this.error = 'Failed to save match result. Please try again.';
+        },
+        complete: () => {
+          //Enable the submit button
+          this.matchForm.enable();
         }
       });
     }

@@ -39,6 +39,12 @@ input, select, textarea {
   border-radius: 4px;
 }
 
+input[type="checkbox"] {
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+}
+
 textarea {
   min-height: 100px;
   resize: vertical;
@@ -80,4 +86,27 @@ button:hover:not(:disabled) {
   background-color: #ffebee;
   color: #c62828;
   border-radius: 4px;
-} 
+}
+
+.form-group--checkbox label {
+  width: 120px;
+  margin-right: 10px;
+  text-align: right;
+  margin-left: 0;
+}
+
+.form-group--checkbox {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.form-group--checkbox input[type='checkbox'] {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  margin-left: 0;
+  margin-right: 0;
+  align-self: flex-start;
+  margin-top: 1.5em; /* Adjust this value as needed for perfect alignment */
+}

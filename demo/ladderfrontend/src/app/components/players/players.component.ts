@@ -191,6 +191,8 @@ export class PlayersComponent implements OnInit {
       this.error = 'Players data is not yet loaded. Please try again in a moment.';
       return;
     }
+    //Disable the schedule match button
+    document.getElementById('scheduleMatchButton')?.setAttribute('disabled', 'true');
 
     this.newMatch.ladderId = 1; // Assuming ladderId 1 for now
     this.newMatch.matchType = 'Singles'; // Default to singles for now
@@ -212,6 +214,8 @@ export class PlayersComponent implements OnInit {
         console.log('Match scheduled successfully:', response);
         this.loadScheduledMatches();
         this.resetNewMatch();
+        //Enable the schedule match button
+        document.getElementById('scheduleMatchButton')?.removeAttribute('disabled');
       },
       error: (err) => {
         this.error = 'Failed to schedule match. Please try again later.';

@@ -39,7 +39,7 @@ CMD ["/app/start_backend.sh"]
 
 # Docker commands to build and run the container
 # docker build -t ladder-app . or docker build --no-cache -t ladder-app .
-# docker run -p 8080:8080 -p 443:443 --add-host=host.docker.internal:host-gateway ladder-app
+# docker run -p 8081:8081 -p 443:443 --add-host=host.docker.internal:host-gateway ladder-app
 # Docker commands to tag and push the image to Docker Hub
 #docker tag ladder-app craigrivers/ladder-app:latest
 #docker login   (Not always needed)

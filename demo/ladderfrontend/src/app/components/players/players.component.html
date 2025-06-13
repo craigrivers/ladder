@@ -190,7 +190,7 @@
           {{ error }}
         </div>
 
-        <button type="submit" [disabled]="!newMatch.player2Id || !newMatch.courtId || !newMatch.matchDate">
+        <button id="scheduleMatchButton" type="submit" [disabled]="!newMatch.player2Id || !newMatch.courtId || !newMatch.matchDate">
           Schedule Match
         </button>
       </form>

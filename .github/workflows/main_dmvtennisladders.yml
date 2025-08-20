@@ -26,6 +26,7 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
+        working-directory: ../demo
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -50,4 +51,5 @@ jobs:
           app-name: 'DMVTennisLadders'
           slot-name: 'Production'
           package: '*.jar'
+
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0A609E3B87924D10ADB58E3EB0E2624D }}

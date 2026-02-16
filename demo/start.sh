@@ -28,7 +28,8 @@ nginx
 echo -e "${GREEN}Starting backend application...${NC}"
 if [ -f "app.war" ]; then
     # Set default database connection if not provided
-    export SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL:-"jdbc:postgresql://host.docker.internal:5432/demo"}
+ #   export SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL:-"jdbc:postgresql://host.docker.internal:5432/demo"}
+    export SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL:-"jdbc:postgresql://localhost:5432/ladder"}
     export SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME:-"postgres"}
     export SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD:-"postgres"}
     

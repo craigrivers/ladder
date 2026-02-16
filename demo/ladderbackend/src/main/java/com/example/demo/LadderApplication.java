@@ -105,6 +105,7 @@ public class LadderApplication {
   @GetMapping("/ladder/courts")
   public ResponseEntity<List<Court>> getCourts() {
     try {
+      log.info("Fetching courts");
       List<Court> courts = playerService.getCourts();
       return ResponseEntity.ok(courts);
     } catch (Exception e) {

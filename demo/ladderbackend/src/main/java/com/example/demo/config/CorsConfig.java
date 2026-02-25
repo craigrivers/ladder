@@ -26,6 +26,7 @@ public class CorsConfig {
         "http://localhost",
         "http://localhost:80",
         "http://localhost:4200",
+        "http://localhost:8081",
         "https://localhost:8081",
         "https://ladder-frontend-vj79.onrender.com",
         "http://ladder-frontend-vj79.onrender.com",

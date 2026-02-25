@@ -33,6 +33,7 @@ public class SecurityConfig {
       "http://localhost",
       "http://localhost:80",
       "https://localhost:8081",
+      "http://localhost:8081",
       "http://ladder-app-a4ra.onrender.com",
       "http://ladder-app-internal:8081" 
     ));

@@ -36,7 +36,7 @@ spring:
       allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost,http://localhost:80,http://localhost:4200,https://ladder-app-a4ra.onrender.com,https://ladder-frontend-vj79.onrender.com,http://localhost:8081,https://localhost:8081,https://dmvtennisladders.com}
       allowed-methods: ${CORS_ALLOWED_METHODS:GET,POST,PUT,DELETE,OPTIONS,PATCH,HEAD}
       allowed-headers: ${CORS_ALLOWED_HEADERS:Authorization,Content-Type,X-Requested-With,Accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Access-Control-Allow-Origin,Access-Control-Allow-Methods,Access-Control-Allow-Headers,Access-Control-Allow-Credentials,Access-Control-Max-Age}
-      allow-credentials: ${CORS_ALLOW_CREDENTIALS:false}
+      allow-credentials: ${CORS_ALLOW_CREDENTIALS:true}
       max-age: ${CORS_MAX_AGE:3600}
   mail:
     host: smtp.gmail.com

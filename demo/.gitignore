@@ -3,7 +3,14 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-
+logs/
+ladderbackend/logs
+ladderbackend/logs/*.log
+ladderbackend/logs/*.log.*
+ladderbackend/logs/*.log.*.*    
+logs/*.log
+logs/*.log.*
+logs/*.log.*.*      
 ### STS ###
 .apt_generated
 .classpath
@@ -31,3 +38,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Database Migration ###
+ladderbackend/src/main/resources/database_scripts/migration/*.dump
+ladderbackend/src/main/resources/database_scripts/migration/*.log

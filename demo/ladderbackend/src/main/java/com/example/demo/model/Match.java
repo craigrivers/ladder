@@ -12,10 +12,6 @@ public class Match {
     private Timestamp matchDate;
     private String player1Name;
     private String player2Name;
-    private Long player3Id;
-    private String player3Name;
-    private Long player4Id;
-    private String player4Name;
     private String matchScheduledStatus;
     private String courtName;
 
@@ -25,8 +21,7 @@ public class Match {
 
     // Constructor for query results
     public Match(long matchId, long ladderId, String matchType, long player1Id, String player1Name,
-                long player2Id, String player2Name, long player3Id, String player3Name,
-                long player4Id, String player4Name, String matchDate, String matchScheduledStatus,
+                long player2Id, String player2Name, String matchDate, String matchScheduledStatus,
                 String courtName) {
         this.matchId = matchId;
         this.ladderId = ladderId;
@@ -35,10 +30,6 @@ public class Match {
         this.player1Name = player1Name;
         this.player2Id = player2Id;
         this.player2Name = player2Name;
-        this.player3Id = player3Id;
-        this.player3Name = player3Name;
-        this.player4Id = player4Id;
-        this.player4Name = player4Name;
         this.matchDate = Timestamp.valueOf(matchDate.replace('T', ' '));
         this.matchScheduledStatus = matchScheduledStatus;
         this.courtName = courtName;
@@ -116,38 +107,6 @@ public class Match {
         this.player2Name = player2Name;
     }
 
-    public Long getPlayer3Id() {
-        return player3Id;
-    }
-
-    public void setPlayer3Id(Long player3Id) {
-        this.player3Id = player3Id;
-    }
-
-    public String getPlayer3Name() {
-        return player3Name;
-    }
-
-    public void setPlayer3Name(String player3Name) {
-        this.player3Name = player3Name;
-    }
-
-    public Long getPlayer4Id() {
-        return player4Id;
-    }
-
-    public void setPlayer4Id(Long player4Id) {
-        this.player4Id = player4Id;
-    }
-
-    public String getPlayer4Name() {
-        return player4Name;
-    }
-
-    public void setPlayer4Name(String player4Name) {
-        this.player4Name = player4Name;
-    }
-
     public String getMatchScheduledStatus() {
         return matchScheduledStatus;
     }
@@ -176,10 +135,6 @@ public class Match {
                 ", matchDate=" + matchDate +
                 ", player1Name='" + player1Name + '\'' +
                 ", player2Name='" + player2Name + '\'' +
-                ", player3Id=" + player3Id +
-                ", player3Name='" + player3Name + '\'' +
-                ", player4Id=" + player4Id +
-                ", player4Name='" + player4Name + '\'' +
                 ", matchScheduledStatus='" + matchScheduledStatus + '\'' +
                 ", courtName='" + courtName + '\'' +
                 '}';

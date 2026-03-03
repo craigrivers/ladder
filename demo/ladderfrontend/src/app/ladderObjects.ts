@@ -41,10 +41,6 @@ export interface Match {
     player1Name: string;
     player2Id: number;
     player2Name: string;
-    player3Id: number;
-    player3Name: string;
-    player4Id: number;
-    player4Name: string;
     matchDate: string;
     courtId: number;
     matchScheduledStatus: string;
